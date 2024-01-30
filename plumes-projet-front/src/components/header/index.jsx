@@ -1,10 +1,11 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const paths = [
     {
-        path: "/",
-        name: "Accueil",
+      path: "/",
+      name: "Accueil",
     },
     {
       path: "/lexique",
@@ -17,21 +18,29 @@ const Header = () => {
     {
       path: "/especes",
       name: "Especes",
-    }
-  ]
+    },
+  ];
+
   return (
-   <>
-   <header className="flex justify-between">
-    <ul className="flex gap-10">
-      {paths.map((element) => {
-        return (
-          <Link to={element.path} key={element.name}><li>{element.name}</li></Link>
-        )
-      })}
-    </ul>
-   </header>
-   </>
-  )
-}
+    <>
+      <header className="flex justify-between items-center bg-gray-800 p-4">
+        {/* Logo or site name can be added here */}
+        <nav>
+          <ul className="flex gap-10">
+            {paths.map((element) => (
+              <li key={element.name}>
+                <Link to={element.path} className="text-white hover:text-gray-300">
+                  {element.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
+    </>
+  );
+};
 
 export default Header;
+
+
