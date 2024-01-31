@@ -11,7 +11,7 @@ const Typography = ({ children, tag, variant = "primary", customClasses }) => {
     "text-blanc-tourterelle": variant === "blanc-tourterelle",
     "text-blanc-plume": variant === "blanc-plume",
     "text-h1": tag === "h1",
-    "text-h2-medium": tag === "h2",
+    "h2-poppins": tag === "h2",
     "text-h3": tag === "h3",
     "text-h4": tag === "h4",
     "text-body": tag === "body",
