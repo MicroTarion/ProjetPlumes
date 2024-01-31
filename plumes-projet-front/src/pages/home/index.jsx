@@ -1,4 +1,4 @@
-import LogoSvg from "../../../public/logo/Group 76.svg"; // Remplacez le chemin par le chemin réel de votre logo
+import LogoSvg from "../../../public/logo/Group 76.svg"; 
 
 const HomePage = () => {
   return (
@@ -14,7 +14,7 @@ const HomePage = () => {
           fontStyle: 'normal',
           fontWeight: 400,
           lineHeight: '22px',
-          textDecoration: 'none', // Supprime le soulignement
+          textDecoration: 'none', 
         }}>
           Découvrez à quel oiseau appartient cette plume
         </h1>
