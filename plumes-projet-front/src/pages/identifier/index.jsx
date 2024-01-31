@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const paths = [
-   
     {
       path: "/lexique",
       name: "Lexique",
@@ -40,10 +39,21 @@ const Header = () => {
 
 const IdentifierPage = () => {
   return (
-    <div>
-      <h2>Page identifier</h2>
+    <div className="bg-vert-nature p-8 text-center">
+      <div className="bg-vert-nature p-4">
+        <h3 style={{
+          fontFamily: 'Poppins',
+          fontSize: '18px',
+          fontStyle: 'normal',
+          fontWeight: 400,
+          lineHeight: 'normal',
+          color: 'var(--Blanc-plume, #F8F8F8)',
+        }}>
+          Identifier ma plume
+        </h3>
+      </div>
     </div>
   );
 };
 
-export { IdentifierPage, Header }; // Exportez les composants de cette manière
+export { IdentifierPage, Header };

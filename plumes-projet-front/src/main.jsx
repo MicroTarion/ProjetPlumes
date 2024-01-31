@@ -1,12 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./layout/Layout.jsx";
 import HomePage from "./pages/home/index.jsx";
 import LexiquePage from "./pages/lexique/index.jsx";
-import IdentifierPage from "./pages/identifier";
+import { IdentifierPage, Header } from "./pages/identifier"; // Importez en tant que module nommé
 import EspecesPage from "./pages/especes/index.jsx";
-import "./index.css"
+import "./index.css";
+
+
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -19,8 +22,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const root = createRoot(document.getElementById("root"));
+root.render(
   <React.StrictMode>
     <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>
+  
 );
