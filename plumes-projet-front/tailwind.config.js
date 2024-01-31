@@ -13,12 +13,13 @@ export default {
         'blanc-plume': '#F8F8F8',
       },
       fontSize: {
-        'h1': '30px',
+        'h1-poppins': '1rem',
         'h2-medium': '26px',
         'h2-poppins': '19px',
         'h3': '18px',
         'h4': '16px',
         'body': '13px',
+
       },
       fontFamily: {
         'f37-attila': ['F37 Attila', 'sans-serif'],
