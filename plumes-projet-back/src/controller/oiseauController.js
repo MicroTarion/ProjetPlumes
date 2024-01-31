@@ -1,3 +1,5 @@
+const oiseauxRepo = require('../repository/oiseauRepo.js');
+
 class oiseauController{
     
     index(req, res) {
@@ -6,7 +8,11 @@ class oiseauController{
         })
     }
     listAll(req, res) { 
-       //TODO Select *
+        const repo = new oiseauxRepo();
+        repo.getAllOiseaux().then((result) => {
+            console.log(result);
+            res.json(result);
+        })
     }
 
 }

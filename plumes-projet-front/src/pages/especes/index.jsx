@@ -5,7 +5,7 @@ const EspecesPage = () => {
     useEffect(()=>{
         const getData = () =>{
             
-            fetch(port+"api/oiseau").then(
+            fetch(port+"list").then(
                 response => response.json()
             ).then(
                 data => {
@@ -20,17 +20,23 @@ const EspecesPage = () => {
     return (
         <div className="App">
             
-            <div>
-                {(!backendData.users)?(
-                    <p>
-                       Loading... 
-                    </p>
-                ):(
-                    
-                    backendData.users.map((user,i)=>{
-                        return <p key={i}>{user}</p>
+            <div className="grid grid-cols-3">
+                {
+                    backendData.map((oiseaux)=>{
+                        return (
+                            <>
+                            <div key={oiseaux.Id_Oiseaux}>
+                            <h4>{oiseaux.nom}</h4>
+                                <div className="flex">
+                                    <img className="w-[10rem]" src={`public/illustrations/illustrations-oiseaux/${oiseaux.illustration}.jpeg`} alt="" />
+                                    <img className="w-[10rem]" src={`public/illustrations/plumes-oiseaux/${oiseaux.img_plumes}.jpg`} alt="" />
+                                </div>
+                            </div>
+                            </>
+                            
+                            ) 
                     })
-                )}
+                }
             </div>
            
         </div>
