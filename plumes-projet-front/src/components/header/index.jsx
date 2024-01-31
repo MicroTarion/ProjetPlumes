@@ -1,4 +1,3 @@
-// import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -25,7 +24,7 @@ const Header = () => {
     <>
       <header className="flex justify-between items-center bg-gray-800 p-4">
         {/* Logo or site name can be added here */}
-        <nav>
+        <nav className="mx-auto">
           <ul className="flex gap-10">
             {paths.map((element) => (
               <li key={element.name}>
@@ -42,5 +41,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
