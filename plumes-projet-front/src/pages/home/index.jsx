@@ -1,10 +1,11 @@
 import { useEffect,useState } from "react";
+const port = "http://localhost:5000/"
 const HomePage = () => {
     const [backendData,setBackendata] = useState([])
     useEffect(()=>{
         const getData = () =>{
             
-            fetch("http://localhost:5000/api").then(
+            fetch(port+"api").then(
                 response => response.json()
             ).then(
                 data => {
