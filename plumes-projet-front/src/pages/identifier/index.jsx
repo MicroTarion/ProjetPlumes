@@ -1,29 +1,29 @@
 import React from 'react';
+import Typography from '../../components/common/Typography';
 
 const IdentifierPage = () => {
   const pageStyle = {
     background: '#2D4941',
-    height: '10vh',  // Réduire la hauteur à 3/4 de l'écran (75% de la vue)
+    height: '10vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    color: 'white',
+    color: '#F8F8F8',
   };
 
   const headingStyle = {
     fontFamily: 'Poppins',
-    fontSize: '18px',
+    fontSize: '2rem',  // Ajustez la taille du texte en fonction de vos préférences
   };
 
   return (
     <div style={pageStyle}>
-      <h2 style={headingStyle}>Identifier ma plume</h2>
-      
-      
+      <Typography tag="h2" variant="blanc-plume" style={headingStyle}>
+        Identifier ma plume
+      </Typography>
     </div>
   );
 };
 
 export default IdentifierPage;
-

@@ -1,29 +1,11 @@
-
 import Typography from "../common/Typography";
+
 const TitleBarre = () => {
-    // const pageStyle = {
-    //     background: '#2D4941',
-    //     height: '10vh',  
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     textAlign: 'center',
-    //     color: 'white',
-    //   };
-    
-    //   const headingStyle = {
-    //     fontFamily: 'Poppins',
-    //     fontSize: '18px',
-    //   };
-    
-      return (
-        // <div style={pageStyle}>
-        //   <h2 style={headingStyle}>Lexique de la plume</h2>
-         <Typography tag="h2" variant="noir-corbeau" >Lexique de la plume</Typography>
-          
-        // </div>
-      );
-    
+  return (
+    <Typography Tag="h3" variant="noir-corbeau" style={{ color: '#2D4941' }}>
+      Lexique de la plume
+    </Typography>
+  );
 }
 
-export default TitleBarre
+export default TitleBarre;
