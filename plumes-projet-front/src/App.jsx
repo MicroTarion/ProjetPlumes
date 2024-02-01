@@ -1,13 +1,9 @@
 import Header from "./components/header";
 import Footer from "./components/footer";
+import { useEffect,useState } from "react";
 
 function App() {
-    return (
-        <div className="App">
-            <Header />
-            <Footer />
-        </div>
-    );
+    
 }
 
 export default App;
