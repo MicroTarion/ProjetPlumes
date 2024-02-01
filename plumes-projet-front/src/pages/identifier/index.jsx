@@ -1,12 +1,11 @@
-import CardFeathersIdentifier from '../../components/cards/CardFeathersIdentifier';
 
-const IdentifierPage = () => {
+const Identifier = () => {
+
   return (
     <div>
-      <h2>Page identifier</h2>
-      <CardFeathersIdentifier />
+      <h1>Page Identifier</h1>
     </div>
-  );
+  )
 }
 
-export default IdentifierPage;
+export default Identifier

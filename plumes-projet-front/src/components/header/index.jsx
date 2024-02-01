@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import BookIcon from "../../../public/logo/iconLexique.svg";
+import LeafIcon from "../../../public/logo/iconEspece.svg";
+import IdentifierIcon from "../../../public/logo/iconIdentifier.svg";
 
 const Header = () => {
   const paths = [
@@ -9,14 +12,17 @@ const Header = () => {
     {
       path: "/lexique",
       name: "Lexique",
+      icon: BookIcon,
     },
     {
       path: "/identifier",
       name: "Identifier",
+      icon: IdentifierIcon,
     },
     {
       path: "/especes",
       name: "Especes",
+      icon: LeafIcon,
     },
   ];
 
@@ -27,9 +33,10 @@ const Header = () => {
         <nav className="mx-auto">
           <ul className="flex gap-10">
             {paths.map((element) => (
-              <li key={element.name}>
+              <li key={element.name} className="text-center">
                 <Link to={element.path} className="text-white hover:text-gray-300">
-                  {element.name}
+                  <div>{element.name}</div>
+                  {element.icon && <img src={element.icon} alt={element.name} className="icon mt-2 mx-auto" />}
                 </Link>
               </li>
             ))}
