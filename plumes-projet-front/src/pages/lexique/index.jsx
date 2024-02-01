@@ -1,7 +1,10 @@
+import TitleBarre from "../../components/common/TitleBarre";
+
 const LexiquePage = () => {
     return (
         <div>
-            <h2>Page Lexique</h2>
+            
+            <TitleBarre />
         </div>
     );
 }
