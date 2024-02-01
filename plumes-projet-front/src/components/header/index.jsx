@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import BookIcon from "../../../public/logo/iconLexique.svg";
-import LeafIcon from "../../../public/logo/iconEspece.svg";
-import IdentifierIcon from "../../../public/logo/iconIdentifier.svg"; 
+
 
 const Header = () => {
   const paths = [
@@ -12,17 +10,17 @@ const Header = () => {
     {
       path: "/lexique",
       name: "Lexique",
-      icon: BookIcon,
+      icon: "/logo/iconLexique.svg",
     },
     {
       path: "/identifier",
       name: "Identifier",
-      icon: IdentifierIcon,
+      icon: "/logo/iconIdentifier.svg",
     },
     {
       path: "/especes",
       name: "Especes",
-      icon: LeafIcon,
+      icon: "/logo/iconEspece.svg",
     },
   ];
 
