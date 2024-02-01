@@ -1,8 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import BookIcon from "../../../public/logo/iconLexique.svg";
 import LeafIcon from "../../../public/logo/iconEspece.svg";
-import IdentifierIcon from "../../../public/logo/iconIdentifier.svg"; // Remplacez par le chemin réel de votre icône pour Identifier
+import IdentifierIcon from "../../../public/logo/iconIdentifier.svg"; 
 
 const Header = () => {
   const paths = [
@@ -30,7 +29,6 @@ const Header = () => {
   return (
     <>
       <header className="flex justify-between items-center bg-gray-800 p-4">
-        {/* Logo or site name can be added here */}
         <nav className="mx-auto">
           <ul className="flex gap-10">
             {paths.map((element) => (
