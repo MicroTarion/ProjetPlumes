@@ -11,7 +11,16 @@ export default {
         'bleu-ciel': '#B6DCFA',
         'blanc-tourterelle': '#F5EFE7',
         'blanc-plume': '#F8F8F8',
+        
       },
+      backgroundColor: {
+        'noir-corbeau': '#021120',
+        'vert-naturaliste': '#2D4941',
+        'bleu-ciel': '#B6DCFA',
+        'blanc-tourterelle': '#F5EFE7',
+        'blanc-plume': '#F8F8F8',
+      },
+
       fontSize: {
         'h1-poppins': '1rem',
         'h2-medium': '26px',
