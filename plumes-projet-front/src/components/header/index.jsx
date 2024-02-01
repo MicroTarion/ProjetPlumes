@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import BookIcon from "../../../public/logo/iconLexique.svg";
 import LeafIcon from "../../../public/logo/iconEspece.svg";
-import IdentifierIcon from "../../../public/logo/iconIdentifier.svg";
+import IdentifierIcon from "../../../public/logo/iconIdentifier.svg"; // Remplacez par le chemin réel de votre icône pour Identifier
 
 const Header = () => {
   const paths = [

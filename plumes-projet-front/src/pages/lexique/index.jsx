@@ -1,7 +1,8 @@
+import Typography from "../../components/common/Typography";
 const LexiquePage = () => {
     return (
         <div>
-            <h2>Page Lexique</h2>
+            <Typography tag="h2" variant={"bleu-ciel"}>Page Lexique</Typography>
         </div>
     );
 }
