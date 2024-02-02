@@ -1,22 +1,37 @@
-/* eslint-disable react/prop-types */
-import clsx from "clsx";
-
 const PaletCard = () => {
-  const colors = [
-    'search-blanc', 'search-gris', 'search-gris-bleute', 'search-bleu', 'search-vert',
-    'search-jaune', 'search-orange', 'search-fauve', 'search-marron', 'search-noir'
-  ];
 
-  return (
-    <div className="flex items-center space-x-2">
-      {colors.map((colorClass, index) => (
-        <div
-          key={index}
-          className={clsx("w-10 h-10 flex-shrink-0 rounded-full mr-2", colorClass)}
-        />
-      ))}
-    </div>
-  );
-};
+
+
+  const colors = [
+    'blanc', 'gris', 'gris-bleute', 'bleu', 'vert',
+    'jaune', 'orange', 'fauve', 'marron', 'noir'
+  ];
+const defaultStyle = "w-10 h-10 flex-shrink-0 rounded-full mr-2"
+   return (
+     <>
+       <div className="flex flex-row">
+
+          <div className={defaultStyle + " bg-search-gris"}/>
+          <div className={defaultStyle + " bg-search-blanc"}/>
+          <div className={defaultStyle + " bg-search-gris"}/>
+          <div className={defaultStyle + " bg-search-gris-bleute"}/>
+          <div className={defaultStyle + " bg-search-bleu"}/>
+          <div className={defaultStyle + " bg-search-vert"}/>
+          <div className={defaultStyle + " bg-search-jaune"}/>
+          <div className={defaultStyle + " bg-search-orange"}/>
+          <div className={defaultStyle + " bg-search-fauve"}/>
+          <div className={defaultStyle + " bg-search-marron"}/>
+          <div className={defaultStyle + " bg-search-noir"}/>
+
+     </div>
+     </>
+    
+    
+   );
+ };
+
+// export default PaletCard;
+
+// PaletCard.jsx
 
 export default PaletCard;
