@@ -14,6 +14,16 @@ class oiseauController{
             res.json(result);
         })
     }
+    search(req, res) {
+        let couleur = req.body.color || '';
+        let motif = req.body.motif || '';
+        let lieu = req.body.lieu || '';
+        const repo = new oiseauxRepo();
+        repo.search(couleur,motif,lieu).then((result) => {
+            console.log(result);
+            res.json(result);
+        })
+    }
 
 }
 module.exports = new oiseauController();

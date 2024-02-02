@@ -3,7 +3,20 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
-app.use(cors())
+var whitelist = [process.env.HTTP_ADDR]
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1|| !origin) {
+      callback(console.log('Connection autorisée'), true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(express.urlencoded({ extended: true }));
+// parse requests of content-type - application/json
+app.use(express.json());
 
 app.get("/",(req,res)=> {
     res.json("lien établi")
@@ -13,21 +26,19 @@ app.get("/api",(req,res)=> {
         "users": ["userone","usertwo","userthree"]
     })
 })
-app.post("/search",(req,res)=> {
-    res.json({
-        "users": ["userone","usertwo","userthree"]
-    })
-    let oiseauController = require("../plumes-projet-back/src/controller/oiseauController");
-    oiseauController.index(req,res)
-})
+
 app.get("/api/oiseau",(req,res)=> {
    let oiseauController = require("../plumes-projet-back/src/controller/oiseauController");
    oiseauController.index(req,res)
 })
 
-app.get("/list",(req,res)=> {
+app.get("/list",cors(corsOptions),(req,res)=> {
     let oiseauController = require("../plumes-projet-back/src/controller/oiseauController.js");
     oiseauController.listAll(req,res)
+})
+app.post("/search",cors(corsOptions),(req,res)=> {
+    let oiseauController = require("../plumes-projet-back/src/controller/oiseauController.js");
+    oiseauController.search(req,res)
 })
 
 // app.get("/api/plume",(req,res)=> {
