@@ -1,24 +1,14 @@
-import React, { useState } from 'react';
-import Button from './Btn';
+import { useState } from 'react';
+import Button from "./Button"
 
 const ContainerButton = ({ onClickDelete, onClickSeeResults }) => {
-  const [deleteClicked, setDeleteClicked] = useState(false);
-  const [seeResultsClicked, setSeeResultsClicked] = useState(false);
-
-  const handleDeleteClick = () => {
-    setDeleteClicked(!deleteClicked);
-    onClickDelete();
-  };
-
-  const handleSeeResultsClick = () => {
-    setSeeResultsClicked(!seeResultsClicked);
-    onClickSeeResults();
-  };
 
   return (
     <div className="flex justify-center space-x-4">
-      
-      <Button></Button>
+      <div className="flex justify-center space-x-4">
+        <Button handleClick={onClickDelete}>Supprimer les filtres</Button>
+        <Button handleClick={onClickSeeResults}>Voir le résultat(s)</Button>
+      </div>
     </div>
   );
 };
