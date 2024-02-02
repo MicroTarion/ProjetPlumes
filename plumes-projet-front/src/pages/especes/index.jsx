@@ -26,14 +26,39 @@ const EspecesPage = () => {
     setSelectedLetter(letter);
   };
 
+  const isLetterDisplayed = backendData.some((oiseaux) => oiseaux.nom[0].toUpperCase() === selectedLetter);
+
   return (
-    <div className="flex bg-vert-naturaliste text-blanc-plume">
+    <div className="flex bg-vert-naturaliste text-blanc-plume relative">
+      {/* Abécédaire (position fixe sur la droite) */}
+      <div className="fixed right-0 flex flex-col items-end p-4">
+        {alphabet.map((letter, index) => (
+          <button
+            key={index}
+            className={`m-1 ${
+              selectedLetter === letter
+                ? 'bg-bleu-ciel text-noir-corbeau underline transform scale-110'
+                : 'bg-vert-naturaliste text-blanc-plume'
+            } hover:bg-bleu-ciel transition-colors duration-300`}
+            onClick={() => filterByLetter(letter)}
+          >
+            {letter}
+          </button>
+        ))}
+      </div>
+
       {/* Affichage des oiseaux */}
       <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
         {backendData
           .filter((oiseaux) => (selectedLetter ? oiseaux.nom[0].toUpperCase() === selectedLetter : true))
-          .map((oiseaux) => (
+          .map((oiseaux, index) => (
             <div key={oiseaux.Id_Oiseaux} className="mb-8">
+              {index === 0 && isLetterDisplayed && (
+                <div className="absolute left-0 top-8 ml-8 text-bleu-ciel font-bold text-lg">
+                  <u>{selectedLetter}</u>
+                </div>
+              )}
+
               <h4 className="text-blanc-plume">{oiseaux.nom}</h4>
               <div className="flex space-x-4">
                 <img className="w-[10rem]" src={`public/illustrations/illustrations-oiseaux/${oiseaux.illustration}.jpeg`} alt="" />
@@ -41,21 +66,6 @@ const EspecesPage = () => {
               </div>
             </div>
           ))}
-      </div>
-
-      {/* Abécédaire (position fixe sur la droite) */}
-      <div className="flex flex-col items-start p-4 ml-auto">
-        {alphabet.map((letter, index) => (
-          <button
-            key={index}
-            className={`m-1 ${
-              selectedLetter === letter ? 'bg-bleu-ciel text-noir-corbeau' : 'bg-vert-naturaliste text-blanc-plume'
-            } hover:bg-bleu-ciel transition-colors duration-300`}
-            onClick={() => filterByLetter(letter)}
-          >
-            {letter}
-          </button>
-        ))}
       </div>
     </div>
   );
