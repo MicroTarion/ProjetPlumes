@@ -32,7 +32,9 @@ export default {
         'bleu-ciel': '#B6DCFA',
         'blanc-tourterelle': '#F5EFE7',
         'blanc-plume': '#F8F8F8',
+        
       },
+
       fontFamily: {
         'f37-attila': ['F37 Attila', 'sans-serif'],
         'poppins': ['Poppins', 'sans-serif'],
