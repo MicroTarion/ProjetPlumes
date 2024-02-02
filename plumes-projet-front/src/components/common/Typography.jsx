@@ -1,20 +1,24 @@
 /* eslint-disable react/prop-types */
 import clsx from "clsx";
 
-const Typography = ({ children, tag, variant = "primary", customClasses }) => {
+const Typography = ({ children, tag, variant, reverse, customClasses }) => {
   const Component = tag || "p";
 
   const className = clsx({
-    "text-noir-corbeau": variant === "noir-corbeau",
+    "text-noir-corbeau bg-blanc-plume": variant === "noir-corbeau" && !reverse,
+    "text-blanc-plume bg-noir-corbeau": variant === "noir-corbeau" && reverse,
+
     "text-vert-naturaliste": variant === "vert-naturaliste",
-    "text-bleu-ciel": variant === "bleu-ciel",
+    
+    "text-bleu-ciel bg-vert-naturaliste": variant === "bleu-ciel" && !reverse,
+    "text-vert-naturaliste bg-bleu-ciel": variant === "bleu-ciel" && reverse,
+
     "text-blanc-tourterelle": variant === "blanc-tourterelle",
-    "text-blanc-plume": variant === "blanc-plume",
-    "text-h1": tag === "h1",
-    "text-h2-medium": tag === "h2",
-    "text-h3": tag === "h3",
-    "text-h4": tag === "h4",
-    "text-body": tag === "body",
+    "text-blanc-plume bg-vert-naturaliste": variant === "blanc-plume",
+    
+    
+    
+    "font-poppins text-lg text-blanc-plume": tag === "h3",
     [customClasses]: customClasses,
   });
 

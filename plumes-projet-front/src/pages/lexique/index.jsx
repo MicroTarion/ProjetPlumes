@@ -1,3 +1,4 @@
+
 import TitleBarre from "../../components/common/TitleBarre";
 // import Typography from "../../components/common/Typography";
 
@@ -6,6 +7,7 @@ const LexiquePage = () => {
         <div>
             
             <TitleBarre />
+
         </div>
     );
 }
