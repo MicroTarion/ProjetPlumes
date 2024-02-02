@@ -37,16 +37,21 @@ const EspecesPage = () => {
 
   return (
     <div>
+      {/* Texte au-dessus de la barre de recherche */}
+      <div className="bg-blanc-plume text-noir-corbeau p-2 text-lg font-bold font-poppins">
+        Toutes les espèces d'oiseaux:
+      </div>
+
       {/* Moteur de recherche au-dessus de la lettre (fond blanc avec bordure verte) */}
-      <div className="bg-blanc-plume border-b border-vert-naturaliste p-2 flex items-center">
+      <div className="bg-blanc-plume border-b p-2 flex items-center" style={{ borderColor: '#008c8c' }}>
         <input
           type="text"
           placeholder="Rechercher..."
           value={searchTerm}
-          onChange={(e) => {setSelectedLetter(''); setSearchTerm(e.target.value)}}
-          className="w-40 p-2 outline-none border-none bg-blanc-plume"
+          onChange={(e) => { setSelectedLetter(''); setSearchTerm(e.target.value) }}
+          className="w-40 p-2 outline-none border-none bg-blanc-plume border-green-naturaliste"
         />
-        <FontAwesomeIcon icon={faSearch} className="ml-2 text-vert-naturaliste text-lg" />
+        <FontAwesomeIcon icon={faSearch} className="ml-2 text-green-naturaliste text-lg" />
       </div>
 
       {/* Conteneur principal (flex avec background vert naturaliste) */}
@@ -80,8 +85,8 @@ const EspecesPage = () => {
 
               <h4 className="text-blanc-plume">{oiseaux.nom}</h4>
               <div className="flex space-x-4">
-                <img className="w-[10rem]" src={`public/illustrations/illustrations-oiseaux/${oiseaux.illustration}.jpeg`} alt="" />
-                <img className="w-[10rem]" src={`public/illustrations/plumes-oiseaux/${oiseaux.img_plumes}.jpg`} alt="" />
+                <img className="w-[10rem] shadow-lg" src={`public/illustrations/illustrations-oiseaux/${oiseaux.illustration}.jpeg`} alt="" />
+                <img className="w-[10rem] shadow-lg" src={`public/illustrations/plumes-oiseaux/${oiseaux.img_plumes}.jpg`} alt="" />
               </div>
             </div>
           ))}
