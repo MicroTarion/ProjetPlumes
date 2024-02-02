@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '../../components/common/Typography';
-// import DeleteFiltersButton from '../../components/common/Btn';
+
 import ContainerButton from '../../components/common/ContainerButton';
 const IdentifierPage = () => {
   return (
@@ -10,7 +10,7 @@ const IdentifierPage = () => {
           Identifier ma plume
         </Typography>
       </div>
-      {/* <DeleteFiltersButton /> */}
+      
       <ContainerButton />
     </>
   );
