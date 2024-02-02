@@ -1,6 +1,6 @@
 import Typography from '../../components/common/Typography';
 
-import ContainerButton from '../../components/common/ContainerButton';
+import ContainerButton from './ContainerButton';
 const IdentifierPage = () => {
   return (
     <>
