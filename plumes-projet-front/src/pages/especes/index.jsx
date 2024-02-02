@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const port = 'http://localhost:5000/';
 
 const EspecesPage = () => {
   const [backendData, setBackendData] = useState([]);
   const [selectedLetter, setSelectedLetter] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const getData = () => {
@@ -28,30 +31,46 @@ const EspecesPage = () => {
 
   const isLetterDisplayed = backendData.some((oiseaux) => oiseaux.nom[0].toUpperCase() === selectedLetter);
 
+  const filteredData = backendData.filter(
+    (oiseaux) => (selectedLetter ? oiseaux.nom[0].toUpperCase() === selectedLetter : true) && oiseaux.nom.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="flex bg-vert-naturaliste text-blanc-plume relative">
-      {/* Abécédaire (position fixe sur la droite) */}
-      <div className="fixed right-0 flex flex-col items-end p-4">
-        {alphabet.map((letter, index) => (
-          <button
-            key={index}
-            className={`m-1 ${
-              selectedLetter === letter
-                ? 'bg-bleu-ciel text-noir-corbeau underline transform scale-110'
-                : 'bg-vert-naturaliste text-blanc-plume'
-            } hover:bg-bleu-ciel transition-colors duration-300`}
-            onClick={() => filterByLetter(letter)}
-          >
-            {letter}
-          </button>
-        ))}
+    <div>
+      {/* Moteur de recherche au-dessus de la lettre (fond blanc avec bordure verte) */}
+      <div className="bg-blanc-plume border-b border-vert-naturaliste p-2 flex items-center">
+        <input
+          type="text"
+          placeholder="Rechercher..."
+          value={searchTerm}
+          onChange={(e) => {setSelectedLetter(''); setSearchTerm(e.target.value)}}
+          className="w-40 p-2 outline-none border-none bg-blanc-plume"
+        />
+        <FontAwesomeIcon icon={faSearch} className="ml-2 text-vert-naturaliste text-lg" />
       </div>
 
-      {/* Affichage des oiseaux */}
-      <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
-        {backendData
-          .filter((oiseaux) => (selectedLetter ? oiseaux.nom[0].toUpperCase() === selectedLetter : true))
-          .map((oiseaux, index) => (
+      {/* Conteneur principal (flex avec background vert naturaliste) */}
+      <div className="flex bg-vert-naturaliste text-blanc-plume relative">
+        {/* Abécédaire (position fixe sur la droite) */}
+        <div className="fixed right-0 flex flex-col items-end p-4">
+          {alphabet.map((letter, index) => (
+            <button
+              key={index}
+              className={`m-1 ${
+                selectedLetter === letter
+                  ? 'bg-bleu-ciel text-noir-corbeau underline transform scale-110'
+                  : 'bg-vert-naturaliste text-blanc-plume'
+              } hover:bg-bleu-ciel transition-colors duration-300`}
+              onClick={() => filterByLetter(letter)}
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
+
+        {/* Affichage des oiseaux */}
+        <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
+          {filteredData.map((oiseaux, index) => (
             <div key={oiseaux.Id_Oiseaux} className="mb-8">
               {index === 0 && isLetterDisplayed && (
                 <div className="absolute left-0 top-8 ml-8 text-bleu-ciel font-bold text-lg">
@@ -66,6 +85,7 @@ const EspecesPage = () => {
               </div>
             </div>
           ))}
+        </div>
       </div>
     </div>
   );
