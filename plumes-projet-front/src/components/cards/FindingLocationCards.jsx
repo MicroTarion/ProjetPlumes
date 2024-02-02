@@ -1,4 +1,4 @@
-const  FindingLocationCard = () => {
+const  FindingLocationCards = () => {
     return (
         <div>
             <h2>Card Finding Location</h2>
@@ -6,4 +6,4 @@ const  FindingLocationCard = () => {
     )
 }
 
-export default FindingLocationCard
+export default FindingLocationCards

@@ -1,4 +1,4 @@
-const FeatherTypeCard = () => {
+const FeatherTypeCards = () => {
     return (
         <div>
             <h2>Card Feather Type</h2>
@@ -6,4 +6,4 @@ const FeatherTypeCard = () => {
     )
 }
 
-export default FeatherTypeCard
+export default FeatherTypeCards

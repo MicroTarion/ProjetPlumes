@@ -1,15 +1,15 @@
-import FindingLocationCard from './FindingLocationCard';
-import FeatherTypeCard from './FeatherTypeCard';
+import FindingLocationCards from './FindingLocationCards';
+import FeatherTypeCards from './FeatherTypeCards';
 import FeathersPatternCard from './FeathersPatternCard';
-import FeathersColorCard from './FeathersColorCard';
+import FeathersColorsCard from './FeathersColorsCard';
 
 const CardFeathersIdentifier = () => {
   return (
     <div className="flex flex-col space-y-4">
-      <FindingLocationCard />
-      <FeatherTypeCard />
+      <FindingLocationCards />
+      <FeatherTypeCards />
       <FeathersPatternCard />
-      <FeathersColorCard />
+      <FeathersColorsCard />
     </div>
   );
 };
