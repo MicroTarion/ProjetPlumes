@@ -6,18 +6,16 @@ const HomePage = () => {
       <img src={LogoSvg} alt="Logo" className="mb-4" style={{ width: '14rem' }} />
 
       <div className={`p-8 text-center`}>
-        <h1 className="text-3xl font-bold" style={{
-          color: 'var(--Blanc-plume, #F8F8F8)',
-          textAlign: 'center',
-          fontFamily: 'Poppins',
-          fontSize: '16px',
-          fontStyle: 'normal',
-          fontWeight: 400,
-          lineHeight: '22px',
-          textDecoration: 'none', // Supprime le soulignement
-        }}>
-          Découvrez à quel oiseau appartient cette plume
-        </h1>
+
+
+        <Typography
+          tag="h1"
+          variant="blanc-plume"
+          customClasses="text-lg font-normal text-center font-Poppins"
+          >
+            Découvrez à quel oiseau appartient cette plume
+        </Typography>
+
       </div>
     </div>
   );

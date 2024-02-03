@@ -41,6 +41,12 @@ app.post("/search",cors(corsOptions),(req,res)=> {
     oiseauController.search(req,res)
 })
 
+app.get('/api/plume',cors(corsOptions),(req,res)=> {
+    let plumeController = require("../plumes-projet-back/src/controller/plumeController.js");
+    console.log("plumeController",plumeController);
+    plumeController.listAll(req,res)
+})
+
 // app.get("/api/plume",(req,res)=> {
 //     res.json({
 //         "plume": 
