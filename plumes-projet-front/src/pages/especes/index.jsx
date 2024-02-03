@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -85,8 +85,8 @@ const EspecesPage = () => {
 
               <h4 className="text-blanc-plume">{oiseaux.nom}</h4>
               <div className="flex space-x-4">
-                <img className="w-[10rem] shadow-lg" src={`public/illustrations/illustrations-oiseaux/${oiseaux.illustration}.jpeg`} alt="" />
-                <img className="w-[10rem] shadow-lg" src={`public/illustrations/plumes-oiseaux/${oiseaux.img_plumes}.jpg`} alt="" />
+                <img className="w-[10rem] rounded shadow-lg" src={`public/illustrations/illustrations-oiseaux/${oiseaux.illustration}.jpeg`} alt="" />
+                <img className="w-[10rem] rounded shadow-lg" src={`public/illustrations/plumes-oiseaux/${oiseaux.img_plumes}.jpg`} alt="" />
               </div>
             </div>
           ))}
