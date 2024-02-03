@@ -14,9 +14,12 @@ const HomePage = () => {
 
       <div className={`p-8 text-center`}>
 
-        <h1 className="text-3xl font-bold text-white font-poppins">
-
-          Découvrez à quel oiseau appartient cette plume
+        <Typography
+          tag="h1"
+          variant="blanc-plume"
+          customClasses="text-lg font-normal text-center font-Poppins"
+          >
+            Découvrez à quel oiseau appartient cette plume
         </Typography>
       </div>
     </div>
