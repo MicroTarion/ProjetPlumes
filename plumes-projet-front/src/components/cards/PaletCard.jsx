@@ -19,6 +19,10 @@ const defaultStyle = "w-10 h-10 flex-shrink-0 rounded-full mr-2"
 
      </div>
      </>
+    
+    
    );
  };
+
+
 export default PaletCard;
