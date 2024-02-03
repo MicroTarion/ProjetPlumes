@@ -1,4 +1,11 @@
-import LogoSvg from "../../../public/logo/Group 76.svg";
+
+
+import LogoSvg from "../../../public/logo/Group 76.svg"; 
+
+
+import Typography from "../../components/common/Typography";
+
+
 
 const HomePage = () => {
   return (
@@ -6,12 +13,15 @@ const HomePage = () => {
       <img src={LogoSvg} alt="Logo" className="mb-4" style={{ width: '14rem' }} />
 
       <div className={`p-8 text-center`}>
+
         <h1 className="text-3xl font-bold text-white font-poppins">
+
           Découvrez à quel oiseau appartient cette plume
-        </h1>
+        </Typography>
       </div>
     </div>
   );
 };
+
 
 export default HomePage;
