@@ -6,8 +6,8 @@ import remigeImage from "../../../public/dataviz/plumeLexique.svg";
 const LexiquePage = () => {
     // Tableau des titres de colonnes
     const titresColonnes = [
-        "Rémiges primaires",
-        "Couverture Primaire",
+        "REMIGES PRIMAIRE",
+        "COUVERTURE PRIMAIRE",
         "ALULA",
         "REMIGES SECONDAIRE",
         "GRANDE COUVERTURE",
