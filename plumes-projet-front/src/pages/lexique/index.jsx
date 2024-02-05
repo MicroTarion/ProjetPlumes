@@ -37,7 +37,20 @@ const LexiquePage = () => {
                     }}
                 />
                 
-                <p style={{ color: '#008c8c', textAlign: 'center', marginTop: '10px' }}>Plumes des ailes</p>
+                <p
+                    style={{
+                        color: 'var(--Vert-naturaliste, #2D4941)',
+                        fontFamily: 'F37 Attila',
+                        fontSize: '30px',
+                        fontStyle: 'normal',
+                        fontWeight: '500',
+                        lineHeight: 'normal',
+                        textAlign: 'center',
+                        marginTop: '10px',
+                    }}
+                >
+                    Plumes des ailes
+                </p>
 
                 {/* Tableau avec Grid */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginTop: '20px' }}>
@@ -49,7 +62,21 @@ const LexiquePage = () => {
                     ))}
                 </div>
 
-                {/* ... (le reste du code reste inchangé) ... */}
+                {/* Rémige primaire externe */}
+                <p
+                    style={{
+                        color: 'var(--Vert-naturaliste, #2D4941)',
+                        fontFamily: 'F37 Attila',
+                        fontSize: '26px',
+                        fontStyle: 'normal',
+                        fontWeight: '500',
+                        lineHeight: 'normal',
+                        textAlign: 'center',
+                        marginTop: '20px',
+                    }}
+                >
+                    Rémige primaire externe
+                </p>
 
                 {/* Image "Rémige Primaires externe" avec texte à côté et en dessous */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', marginTop: '20px' }}>
@@ -57,7 +84,7 @@ const LexiquePage = () => {
                         src={remigeImage}
                         alt="Rémige Image"
                         style={{
-                            width: '80px',
+                            width: '60px',
                             height: 'auto',
                             marginRight: '20px',
                         }}
