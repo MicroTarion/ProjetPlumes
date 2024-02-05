@@ -4,12 +4,12 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const port = "http://localhost:5000/";
 
-const OiseauEtPlumeCard = ({ oiseau, selectedLetter }) => {
+const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
   return (
     <div className="mb-8">
-      {selectedLetter !== "" ? (
+      {selectedLetter !== "" && isFirst ? (
         <div className="absolute left-0 top-8 ml-8 font-bold text-lg">
-          <u className={`text-bleu-ciel font-bold text-lg`}>
+          <u className={`text-ui-bleu-ciel font-bold text-lg`}>
             {selectedLetter}
           </u>
         </div>
@@ -40,11 +40,6 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter }) => {
   );
 };
 
-
-
-
-
-
 const EspecesPage = () => {
   const [backendData, setBackendData] = useState(null);
   const [selectedLetter, setSelectedLetter] = useState("");
@@ -68,20 +63,26 @@ const EspecesPage = () => {
   );
 
   const filterByLetter = (letter) => {
-    setSelectedLetter(letter);
+    setSelectedLetter((prevLetter) =>
+      prevLetter === letter ? "" : letter
+    );
   };
 
-console.log(backendData);
-  const isLetterDisplayed = backendData? backendData.some((oiseaux) => {
-    console.log(oiseaux.NomOiseau)
-    return oiseaux.NomOiseau.toUpperCase() === selectedLetter}): false;
+  const isLetterDisplayed = backendData
+    ? backendData.some((oiseaux) =>
+        oiseaux.NomOiseau.toUpperCase().includes(selectedLetter)
+      )
+    : false;
 
-
-  const filteredData =backendData? backendData.filter(
-    (oiseaux) => (selectedLetter ? oiseaux.NomOiseau.toUpperCase() === selectedLetter : true) && oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
-  ): false;
-console.log(filteredData);
-
+  const filteredData = backendData
+    ? backendData.filter(
+        (oiseaux) =>
+          (selectedLetter
+            ? oiseaux.NomOiseau.toUpperCase().includes(selectedLetter)
+            : true) &&
+          oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : false;
 
   return (
     <div>
@@ -116,29 +117,29 @@ console.log(filteredData);
         {/* Abécédaire (position fixe sur la droite) */}
         <div className="fixed right-0 flex flex-col items-end p-4">
           {alphabet.map((letter, index) => (
-          <button
-          key={index}
-          className={`m-1 ${
-            selectedLetter === letter
-              ? "bg-bleu-ciel text-noir-corbeau underline transform scale-110"
-              : "bg-vert-naturaliste text-blanc-plume"
-          } hover:bg-bleu-ciel transition-colors duration-300`}
-          onClick={() => filterByLetter(letter)}
-        >
-          {letter}
-        </button>
-        
+            <button
+              key={index}
+              className={`m-1 ${
+                selectedLetter === letter
+                  ? "bg-bleu-ciel text-noir-corbeau underline transform scale-110"
+                  : "bg-vert-naturaliste text-blanc-plume"
+              } hover:bg-bleu-ciel transition-colors duration-300`}
+              onClick={() => filterByLetter(letter)}
+            >
+              {letter}
+            </button>
           ))}
         </div>
 
         {/* Affichage des oiseaux */}
         <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
           {filteredData
-            ? filteredData.map((oiseau) => (
+            ? filteredData.map((oiseau, index) => (
                 <OiseauEtPlumeCard
                   key={oiseau.NomOiseau}
                   oiseau={oiseau}
                   selectedLetter={selectedLetter}
+                  isFirst={index === 0}
                 />
               ))
             : null}
