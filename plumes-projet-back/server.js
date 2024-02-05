@@ -17,7 +17,7 @@ var corsOptions = {
 app.use(express.urlencoded({ extended: true }));
 // parse requests of content-type - application/json
 app.use(express.json());
-
+app.use(cors())
 app.get("/",(req,res)=> {
     res.json("lien établi")
 })
@@ -32,7 +32,7 @@ app.get("/api/oiseau",(req,res)=> {
    oiseauController.index(req,res)
 })
 
-app.get("/list",cors(corsOptions),(req,res)=> {
+app.get("/list",(req,res)=> {
     let oiseauController = require("../plumes-projet-back/src/controller/oiseauController.js");
     oiseauController.listAll(req,res)
 })
