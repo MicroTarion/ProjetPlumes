@@ -4,39 +4,41 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const port = "http://localhost:5000/";
 
-const OiseauEtPlumeCard = ({ oiseau, selectedLetter }) => {
+const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
   return (
     <div className="mb-8">
-      {selectedLetter !== "" ? (
+      {selectedLetter !== "" && isFirst ? (
         <div className="absolute left-0 top-8 ml-8 font-bold text-lg">
-          <u className={`text-bleu-ciel font-bold text-lg`}>
+          <u className={`text-ui-bleu-ciel font-bold text-lg`}>
             {selectedLetter}
           </u>
         </div>
       ) : null}
 
       <h4 className="text-blanc-plume font-poppins">{oiseau.nom}</h4>
-      <div className="flex flex-col items-center space-y-2">
-        <img
-          className="w-[10rem] rounded shadow-lg"
-          src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
-          alt={oiseau.NomOiseau}
-        />
-        <p className="text-blanc-plume font-poppins">{`Illustration: ${oiseau.NomOiseau}`}</p>
-        <img
-          className="w-[10rem] rounded shadow-lg"
-          src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
-          alt={`Plumes de ${oiseau.NomOiseau}`}
-        />
-        <p className="text-blanc-plume font-poppins">{`Plumes de ${oiseau.NomOiseau}`}</p>
+
+      <div className="grid grid-cols-2 gap-4 items-center">
+        <div className="flex flex-col items-center space-y-2">
+          <img
+            className="w-[40rem] h-[10rem] rounded shadow-lg"
+            src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
+            alt={oiseau.NomOiseau}
+          />
+          <p className="text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
+        </div>
+
+        <div className="flex flex-col items-center space-y-2">
+          <img
+            className="w-[10rem] h-[10rem] rounded shadow-lg"
+            src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
+            alt={`Plumes de ${oiseau.NomOiseau}`}
+          />
+          <p className="text-ui-blanc-plume font-poppins">{`Plumes de ${oiseau.NomOiseau}`}</p>
+        </div>
       </div>
     </div>
   );
 };
-
-
-
-
 
 const EspecesPage = () => {
   const [backendData, setBackendData] = useState(null);
@@ -61,37 +63,26 @@ const EspecesPage = () => {
   );
 
   const filterByLetter = (letter) => {
-    setSelectedLetter(letter);
-    setSearchTerm("");
+    setSelectedLetter((prevLetter) =>
+      prevLetter === letter ? "" : letter
+    );
   };
 
-  const isLetterDisplayed = backendData? backendData.filter((oiseaux) => {
-    return oiseaux.NomOiseau.includes(selectedLetter)}): false;
-
-
-  const getFilteredData = () => {
-
-    if(!backendData) return [];
-
-    if (selectedLetter) {
-      return backendData.filter(
-        (oiseaux) => ( oiseaux.NomOiseau[0].toUpperCase() === selectedLetter))
-      
-    } else if (searchTerm) {
-      return backendData.filter(
-        (oiseaux) => oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
+  const isLetterDisplayed = backendData
+    ? backendData.some((oiseaux) =>
+        oiseaux.NomOiseau.toUpperCase().includes(selectedLetter)
       )
-    } else {
-      return backendData
-    }
-  }
+    : false;
 
-  const filteredData = getFilteredData();
-  
-  
-  
-  
-
+  const filteredData = backendData
+    ? backendData.filter(
+        (oiseaux) =>
+          (selectedLetter
+            ? oiseaux.NomOiseau.toUpperCase().includes(selectedLetter)
+            : true) &&
+          oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : false;
 
   return (
     <div>
@@ -126,29 +117,29 @@ const EspecesPage = () => {
         {/* Abécédaire (position fixe sur la droite) */}
         <div className="fixed right-0 flex flex-col items-end p-4">
           {alphabet.map((letter, index) => (
-          <button
-          key={index}
-          className={`m-1 ${
-            selectedLetter === letter
-              ? "bg-bleu-ciel text-noir-corbeau underline transform scale-110"
-              : "bg-vert-naturaliste text-blanc-plume"
-          } hover:bg-bleu-ciel transition-colors duration-300`}
-          onClick={() => filterByLetter(letter)}
-        >
-          {letter}
-        </button>
-        
+            <button
+              key={index}
+              className={`m-1 ${
+                selectedLetter === letter
+                  ? "bg-bleu-ciel text-noir-corbeau underline transform scale-110"
+                  : "bg-vert-naturaliste text-blanc-plume"
+              } hover:bg-bleu-ciel transition-colors duration-300`}
+              onClick={() => filterByLetter(letter)}
+            >
+              {letter}
+            </button>
           ))}
         </div>
 
         {/* Affichage des oiseaux */}
         <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
           {filteredData
-            ? filteredData.map((oiseau) => (
+            ? filteredData.map((oiseau, index) => (
                 <OiseauEtPlumeCard
                   key={oiseau.NomOiseau}
                   oiseau={oiseau}
                   selectedLetter={selectedLetter}
+                  isFirst={index === 0}
                 />
               ))
             : null}
