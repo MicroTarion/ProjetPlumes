@@ -3,7 +3,7 @@ import { useState } from 'react';
 const transformSlug = (type) => {
     return type.toLowerCase().replaceAll(' ', '-').replace('é', 'e')}
 
-const FeatherTypeCards = ({type, folder}) => {
+const FeatherTypeCards = ({type, folder, handleClick, selected}) => {
     const [active, setActive] = useState(false);
 
     const slug = transformSlug(type);
@@ -17,9 +17,10 @@ const FeatherTypeCards = ({type, folder}) => {
     }
 
     const activeOrInactiveSlug = active ? `${slug}-actif` : slug
+    const finalSlug = selected ? `${slug}-actif` : activeOrInactiveSlug
     return (
-        <button onBlur={handleBlur} onFocus={handleActive}>
-            <img src={`/cards/${folder}/card-${activeOrInactiveSlug}.svg`} alt={type} />
+        <button onBlur={handleBlur} onFocus={handleActive} onClick={handleClick}>
+            <img src={`/cards/${folder}/card-${finalSlug}.svg`} alt={type} />
         </button>
     )
 }

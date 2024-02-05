@@ -1,28 +1,40 @@
+import { useState } from 'react';
+
 const PaletCard = () => {
+  const [selectedColors, setSelectedColors] = useState([]);
 
-const defaultStyle = "w-10 h-10 flex-shrink-0 rounded-full mr-2"
-   return (
-     <>
-       <div className="flex flex-row">
+  const colors = ["blanc", "gris", "gris-bleute", "bleu", "vert", "jaune", "orange", "fauve", "marron", "noir"];
 
-          <div className={defaultStyle + " bg-search-gris"}/>
-          <div className={defaultStyle + " bg-search-blanc"}/>
-          <div className={defaultStyle + " bg-search-gris"}/>
-          <div className={defaultStyle + " bg-search-gris-bleute"}/>
-          <div className={defaultStyle + " bg-search-bleu"}/>
-          <div className={defaultStyle + " bg-search-vert"}/>
-          <div className={defaultStyle + " bg-search-jaune"}/>
-          <div className={defaultStyle + " bg-search-orange"}/>
-          <div className={defaultStyle + " bg-search-fauve"}/>
-          <div className={defaultStyle + " bg-search-marron"}/>
-          <div className={defaultStyle + " bg-search-noir"}/>
+  const defaultStyle = "w-10 h-10 flex-shrink-0 rounded-full mr-2 border-4 border-solid border-ui-vert-naturaliste";
+  const selectedStyle = "border-8 border-solid border-ui-vert-naturaliste";
 
-     </div>
-     </>
-    
-    
-   );
- };
+  const handleItemClick = (color) => {
+    setSelectedColors((prevSelectedColors) => {
+      if (prevSelectedColors.includes(color)) {
+        return prevSelectedColors.filter((selectedColor) => selectedColor !== color);
+      } else {
+        return [...prevSelectedColors, color];
+      }
+    });
+  };
 
+  return (
+    <>
+      <div className="flex flex-row">
+        {colors.map((color, index) => (
+          <div
+            key={index}
+            className={selectedColors.includes(color) ? defaultStyle + ` bg-search-${color} ${selectedStyle}` : defaultStyle + ` bg-search-${color}`}
+            onClick={() => handleItemClick(color)}
+          />
+        ))}
+      </div>
+    </>
+  );
+};
 
 export default PaletCard;
+
+
+
+
