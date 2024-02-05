@@ -34,7 +34,17 @@ export default {
         'blanc-plume': '#F8F8F8',
         
       },
-
+      borderColor: {
+        'ui-noir-corbeau': '#021120',
+        'ui-vert-naturaliste': '#2D4941',
+        'ui-blanc-tourterelle': '#F5EFE7',
+        'ui-blanc-plume': '#F8F8F8',
+      },
+      textColor: {
+        'ui-noir-corbeau': '#021120',
+        'ui-vert-naturaliste': '#2D4941',
+        'ui-blanc-plume': '#F8F8F8',
+      },
       fontFamily: {
         'f37-attila': ['F37 Attila', 'sans-serif'],
         'poppins': ['Poppins', 'sans-serif'],
