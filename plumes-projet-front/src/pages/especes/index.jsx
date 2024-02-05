@@ -16,23 +16,30 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter }) => {
       ) : null}
 
       <h4 className="text-blanc-plume font-poppins">{oiseau.nom}</h4>
-      <div className="flex flex-col items-center space-y-2">
-        <img
-          className="w-[10rem] rounded shadow-lg"
-          src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
-          alt={oiseau.NomOiseau}
-        />
-        <p className="text-blanc-plume font-poppins">{`Illustration: ${oiseau.NomOiseau}`}</p>
-        <img
-          className="w-[10rem] rounded shadow-lg"
-          src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
-          alt={`Plumes de ${oiseau.NomOiseau}`}
-        />
-        <p className="text-blanc-plume font-poppins">{`Plumes de ${oiseau.NomOiseau}`}</p>
+
+      <div className="grid grid-cols-2 gap-4 items-center">
+        <div className="flex flex-col items-center space-y-2">
+          <img
+            className="w-[40rem] h-[10rem] rounded shadow-lg"
+            src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
+            alt={oiseau.NomOiseau}
+          />
+          <p className="text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
+        </div>
+
+        <div className="flex flex-col items-center space-y-2">
+          <img
+            className="w-[10rem] h-[10rem] rounded shadow-lg"
+            src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
+            alt={`Plumes de ${oiseau.NomOiseau}`}
+          />
+          <p className="text-ui-blanc-plume font-poppins">{`Plumes de ${oiseau.NomOiseau}`}</p>
+        </div>
       </div>
     </div>
   );
 };
+
 
 
 
