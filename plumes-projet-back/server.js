@@ -1,60 +1,18 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const path = require('path')
 const cors = require('cors')
 
-var whitelist = [process.env.HTTP_ADDR]
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1|| !origin) {
-      callback(console.log('Connection autorisée'), true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
 app.use(express.urlencoded({ extended: true }));
-// parse requests of content-type - application/json
-app.use(express.json());
+app.use(express.json());// parse requests of content-type - application/json
+const router = require(path.join(__dirname, 'app', 'routes.js'));
 
-app.get("/",(req,res)=> {
-    res.json("lien établi")
-})
-app.get("/api",(req,res)=> {
-    res.json({
-        "users": ["userone","usertwo","userthree"]
-    })
-})
+router(app);
 
-app.get("/api/oiseau",(req,res)=> {
-   let oiseauController = require("../plumes-projet-back/src/controller/oiseauController");
-   oiseauController.index(req,res)
-})
 
-app.get("/list",cors(corsOptions),(req,res)=> {
-    let oiseauController = require("../plumes-projet-back/src/controller/oiseauController.js");
-    oiseauController.listAll(req,res)
-})
-app.post("/search",cors(corsOptions),(req,res)=> {
-    let oiseauController = require("../plumes-projet-back/src/controller/oiseauController.js");
-    oiseauController.search(req,res)
-})
-
-app.get('/api/plume',cors(corsOptions),(req,res)=> {
-    let plumeController = require("../plumes-projet-back/src/controller/plumeController.js");
-    console.log("plumeController",plumeController);
-    plumeController.listAll(req,res)
-})
-
-// app.get("/api/plume",(req,res)=> {
-//     res.json({
-//         "plume": 
-//             {"couleur" : "bleu",
-//             "type": "machin scientifique 2",
-//             "taille": "10 cm",
-//             "illustration":"src/public/img/blblbl.jpg"}
-//     })
-// })
-
-app.listen(5000, ()=> {console.log("Server start on port http://localhost:5000")})
+app.listen(process.env.PORT_HTTP, () => {
+  if (process.env.APP_ENV == 'dev') {
+    console.log(`Server is running on ${process.env.HTTP_SERVER}`);
+  }
+});

@@ -15,11 +15,12 @@ class oiseauController{
         })
     }
     search(req, res) {
-        let couleur = req.body.color || '';
-        let motif = req.body.motif || '';
-        let lieu = req.body.lieu || '';
+        let couleur = req.body.couleur || null;
+        let motif = req.body.motif || null;
+        let lieu = req.body.lieu || null;
+        let typePlume = req.body.typePlume || null;
         const repo = new oiseauxRepo();
-        repo.search(couleur,motif,lieu).then((result) => {
+        repo.search(couleur,motif,lieu,typePlume).then((result) => {
             console.log(result);
             res.json(result);
         })
