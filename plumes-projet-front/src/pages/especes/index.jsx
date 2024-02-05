@@ -64,15 +64,17 @@ const EspecesPage = () => {
     setSelectedLetter(letter);
   };
 
-  const filteredData = backendData
-    ? backendData.filter(
-        (oiseaux) =>
-          (selectedLetter
-            ? oiseaux.NomOiseau.toUpperCase().includes(selectedLetter)
-            : true) &&
-          oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : false;
+console.log(backendData);
+  const isLetterDisplayed = backendData? backendData.some((oiseaux) => {
+    console.log(oiseaux.NomOiseau)
+    return oiseaux.NomOiseau.toUpperCase() === selectedLetter}): false;
+
+
+  const filteredData =backendData? backendData.filter(
+    (oiseaux) => (selectedLetter ? oiseaux.NomOiseau.toUpperCase() === selectedLetter : true) && oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
+  ): false;
+console.log(filteredData);
+
 
   return (
     <div>
