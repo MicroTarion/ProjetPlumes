@@ -1,5 +1,8 @@
+
+import Typography from "../../components/common/Typography";
 import LogoSvg from "../../../public/logo/Group 76.svg";
 import VideoBackground from "../../../public/videos/bgPlumes.mp4";
+
 
 const HomePage = () => {
   return (

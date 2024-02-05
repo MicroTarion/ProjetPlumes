@@ -33,10 +33,12 @@ console.log(backendData);
     console.log(oiseaux.NomOiseau)
     return oiseaux.NomOiseau.toUpperCase() === selectedLetter}): false;
 
+
   const filteredData =backendData? backendData.filter(
     (oiseaux) => (selectedLetter ? oiseaux.NomOiseau.toUpperCase() === selectedLetter : true) && oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
   ): false;
 console.log(filteredData);
+
   return (
     <div>
       {/* Texte au-dessus de la barre de recherche */}
