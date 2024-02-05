@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const FindingLocationCards = ({ title, logoFileName }) => {
   
     const imagePath = `/lieux/${logoFileName}`;
