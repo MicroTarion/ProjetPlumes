@@ -1,4 +1,5 @@
 import LogoSvg from "../../../public/logo/Group 76.svg"; // Remplacez le chemin par le chemin réel de votre logo
+import Typography from "../../components/common/Typography";
 
 const HomePage = () => {
   return (

@@ -20,7 +20,7 @@ const Header = () => {
     {
       path: "/especes",
       name: "Especes",
-      icon: "/logo/iconEspece.svg",
+      icon: "/logo/IconEspece.svg",
     },
   ];
 

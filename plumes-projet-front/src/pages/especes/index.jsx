@@ -29,10 +29,13 @@ const EspecesPage = () => {
     setSelectedLetter(letter);
   };
 
-  const isLetterDisplayed = backendData.some((oiseaux) => oiseaux.nom[0].toUpperCase() === selectedLetter);
+  const isLetterDisplayed = backendData.some((oiseaux) => {
+    oiseaux.NomOiseau.toUpperCase() === selectedLetter
+  });
+ 
 
   const filteredData = backendData.filter(
-    (oiseaux) => (selectedLetter ? oiseaux.nom[0].toUpperCase() === selectedLetter : true) && oiseaux.nom.toLowerCase().includes(searchTerm.toLowerCase())
+    (oiseaux) => (selectedLetter ? oiseaux.NomOiseau.toUpperCase() === selectedLetter : true) && oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
