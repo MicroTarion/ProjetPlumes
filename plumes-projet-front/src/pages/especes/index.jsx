@@ -5,7 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 const port = 'http://localhost:5000/';
 
 const EspecesPage = () => {
-  const [backendData, setBackendData] = useState([]);
+  const [backendData, setBackendData] = useState(null);
   const [selectedLetter, setSelectedLetter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -28,15 +28,16 @@ const EspecesPage = () => {
   const filterByLetter = (letter) => {
     setSelectedLetter(letter);
   };
+console.log(backendData);
+  const isLetterDisplayed = backendData? backendData.some((oiseaux) => {
+    console.log(oiseaux.NomOiseau)
+    return oiseaux.NomOiseau.toUpperCase() === selectedLetter}): false;
 
-  const isLetterDisplayed = backendData.some((oiseaux) => {
-    oiseaux.NomOiseau.toUpperCase() === selectedLetter
-  });
- 
 
-  const filteredData = backendData.filter(
+  const filteredData =backendData? backendData.filter(
     (oiseaux) => (selectedLetter ? oiseaux.NomOiseau.toUpperCase() === selectedLetter : true) && oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ): false;
+console.log(filteredData);
 
   return (
     <div>
@@ -78,7 +79,7 @@ const EspecesPage = () => {
 
         {/* Affichage des oiseaux */}
         <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
-          {filteredData.map((oiseaux, index) => (
+{filteredData?         filteredData.map((oiseaux, index) => (
             <div key={oiseaux.Id_Oiseaux} className="mb-8">
               {index === 0 && isLetterDisplayed && (
                 <div className="absolute left-0 top-8 ml-8 text-bleu-ciel font-bold text-lg">
@@ -92,7 +93,9 @@ const EspecesPage = () => {
                 <img className="w-[10rem] rounded shadow-lg" src={`public/illustrations/plumes-oiseaux/${oiseaux.img_plumes}.jpg`} alt="" />
               </div>
             </div>
-          ))}
+          )) : null
+  
+}
         </div>
       </div>
     </div>

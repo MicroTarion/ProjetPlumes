@@ -5,11 +5,11 @@ const path = require('path')
 const cors = require('cors')
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// parse requests of content-type - application/json
+app.use(express.json());// parse requests of content-type - application/json
 const router = require(path.join(__dirname, 'app', 'routes.js'));
 
 router(app);
+
 
 app.listen(process.env.PORT_HTTP, () => {
   if (process.env.APP_ENV == 'dev') {
