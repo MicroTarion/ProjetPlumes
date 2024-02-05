@@ -1,5 +1,5 @@
-import LogoSvg from "../../../public/logo/Group 76.svg"; // Remplacez le chemin par le chemin réel de votre logo
-
+import LogoSvg from "../../../public/logo/Group 76.svg";
+import Typography from "../../components/common/Typography";
 const HomePage = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-vert-naturaliste">
