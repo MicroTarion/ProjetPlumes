@@ -19,6 +19,7 @@ const IdentifierPage = () => {
   const [motifPlume, setMotifPlume] = useState (null);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedFeatherType, setSelectedFeatherType] = useState(null);
+  const [selectedPalet, setSelectedPalet] = useState(null);
 
   const plumeData = [
     {
@@ -108,10 +109,10 @@ const IdentifierPage = () => {
 
       <div className="flex flex-row items-center justify-center">
         {plumeData.map((plume) => (
-          <FeatherTypeCards key={plume.Id_Plumes} type={plume["types de plumes"]} folder="typePlume" />
+          <FeatherTypeCards key={plume.Id_Plumes} type={plume["types de plumes"]} folder="typePlume" handleClick={() => setSelectedFeatherType(plume["types de plumes"])} selected={selectedFeatherType === plume["types de plumes"]}/>
         ))}
       </div>
-      <PaletCard title="Autre Card" logoFileName="autre-icon.svg" />
+      <PaletCard title="Autre Card" logoFileName="autre-icon.svg" handleClick={() => setSelectedPalet("autre")} selected={selectedPalet === "autre"} />
    
          <ContainerButton onClickDelete={() => console.log("detele")} onClickSeeResults={() => console.log("see result")} />
     </div>
