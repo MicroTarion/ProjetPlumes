@@ -22,7 +22,7 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter }) => {
           src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
           alt={oiseau.NomOiseau}
         />
-        <p className="text-blanc-plume font-poppins">{`Illustration: ${oiseau.illustration}`}</p>
+        <p className="text-blanc-plume font-poppins">{`Illustration: ${oiseau.NomOiseau}`}</p>
         <img
           className="w-[10rem] rounded shadow-lg"
           src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
