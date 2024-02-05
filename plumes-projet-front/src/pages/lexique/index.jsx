@@ -6,8 +6,8 @@ import remigeImage from "../../../public/dataviz/plumeLexique.svg";
 const LexiquePage = () => {
     // Tableau des titres de colonnes
     const titresColonnes = [
-        "Rémiges primaires",
-        "Couverture Primaire",
+        "REMIGES PRIMAIRE",
+        "COUVERTURE PRIMAIRE",
         "ALULA",
         "REMIGES SECONDAIRE",
         "GRANDE COUVERTURE",
@@ -30,8 +30,8 @@ const LexiquePage = () => {
                     src={lexiqueImage}
                     alt="Image Lexique"
                     style={{
-                        width: '80%', // Réduire la taille de l'image à 80%
-                        maxWidth: '600px',
+                        width: '100%', // Agrandir la taille de l'image à 100% de la largeur du conteneur
+                        maxWidth: '800px', // Définir une largeur maximale pour l'image
                         display: 'block',
                         margin: '0 auto', // Centrer l'image horizontalement
                     }}
