@@ -5,6 +5,7 @@ import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
 import CursorSize from "../../components/cards/CursorSize";
 import { useState } from "react";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
+import BirdResult from "../../components/cards/BirdResult";
 
 
 const IdentifierPage = () => {
@@ -149,6 +150,7 @@ const IdentifierPage = () => {
           onClickSeeResults={() => console.log("see result")}
         />
       </div>
+      <BirdResult/>
     </>
   );
 };
