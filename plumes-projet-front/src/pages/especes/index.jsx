@@ -3,14 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Abecedaire from "../../components/common/Abecedaire";
 
-
 const port = "http://localhost:5000/";
-
 const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
   return (
-    <div className="mb-8">
+    <div className={`mb-${isFirst ? "12" : "8"}`}> {/* Augmentation de la marge pour la première ligne */}
       {selectedLetter !== "" && isFirst ? (
-        <div className="absolute left-0 top-8 ml-8 font-bold text-lg">
+        <div className="absolute left-0 top-0 ml-8 font-bold text-lg" style={{marginTop: '-3px'}}> {/* Ajout de la marge supérieure négative */}
           <u className={`text-ui-bleu-ciel font-bold text-lg`}>
             {selectedLetter}
           </u>
@@ -19,19 +17,19 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
 
       <h4 className="text-blanc-plume font-poppins">{oiseau.nom}</h4>
 
-      <div className="grid grid-cols-2 gap-4 items-center">
-        <div className="flex flex-col items-center space-y-2">
+      <div className="flex space-x-4">
+        <div className="flex flex-col items-center space-y-2 mx-4" style={{marginTop: '20px'}}> {/* Ajout de la marge supérieure pour la première ligne */}
           <img
-            className="w-[40rem] h-[10rem] rounded shadow-lg"
+            className="w-auto max-h-[7rem] rounded shadow-lg"
             src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
             alt={oiseau.NomOiseau}
           />
           <p className="text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
         </div>
 
-        <div className="flex flex-col items-center space-y-2">
+        <div className="flex flex-col items-center space-y-2 mx-4" style={{marginTop: '20px'}}> {/* Ajout de la marge supérieure pour la deuxième ligne */}
           <img
-            className="w-[10rem] h-[10rem] rounded shadow-lg"
+            className="w-auto max-h-[8rem] rounded shadow-lg mr-12"
             src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
             alt={`Plumes de ${oiseau.NomOiseau}`}
           />
@@ -130,7 +128,7 @@ const EspecesPage = () => {
         />
 
         {/* Affichage des oiseaux */}
-        <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
+        <div className="grid grid-cols-3 gap-0 mx-auto mt-4">
           {filteredData
             ? filteredData.map((oiseau, index) => (
                 <OiseauEtPlumeCard
