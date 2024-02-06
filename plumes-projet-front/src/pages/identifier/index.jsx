@@ -2,16 +2,19 @@ import FindingLocationCards from "../../components/cards/FindingLocationCards";
 import Typography from "../../components/common/Typography";
 import ContainerButton from "./ContainerButton";
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import CursorSize from "../../components/cards/CursorSize";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
 
+
+const port = "http://localhost:5000/";
 const IdentifierPage = () => {
 
   const navigate = useNavigate();
 
-  
+  const [backendData, setBackendData] = useState(null);
+  const [Id_Oiseaux, setId_Oiseaux] = useState([]);
   const [motifPlume, setMotifPlume] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -83,6 +86,45 @@ const IdentifierPage = () => {
 
   const sizes = [];
 
+  useEffect(() => {
+    const getData = () => {
+      fetch(port + "list")
+        .then((response) => response.json())
+        .then((data) => {
+          setBackendData(data);
+        });
+    };
+
+    getData();
+  }, []);
+
+    const postData = () => {
+      console.log(JSON.stringify({
+        motif: motifPlume,
+        lieu: selectedLocation,
+        couleur: selectedColor,
+        typePlume: selectedFeatherType,
+      }));
+      fetch(port + "search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          motif: motifPlume,
+          lieu: selectedLocation,
+          couleur: selectedColor,
+          typePlume: selectedFeatherType,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setId_Oiseaux(data);
+        })
+    }
+
+
   return (
     <>
       <div>
@@ -149,9 +191,10 @@ const IdentifierPage = () => {
             setMotifPlume(null);
             setSelectedColor(null);
           }}
-          onClickSeeResults={() =>{
-            console.log("see result")
+          onClickSeeResults={() => {
+            postData();
             navigate('/resultat', { state: { selectedLocation: selectedLocation, selectedFeatherType: selectedFeatherType, motifPlume: motifPlume, selectedColor: selectedColor } })
+            console.log(Id_Oiseaux);
           }}
         />
       </div>
