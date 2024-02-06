@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import Abecedaire from "../../components/common/Abecedaire";
+
 
 const port = "http://localhost:5000/";
 
@@ -119,22 +121,13 @@ const EspecesPage = () => {
 
       {/* Conteneur principal (flex avec background vert naturaliste) */}
       <div className="flex bg-vert-naturaliste text-blanc-plume relative">
-        {/* Abécédaire (position fixe sur la droite) */}
-        <div className="fixed right-0 flex flex-col items-end p-4">
-          {alphabet.map((letter, index) => (
-            <button
-              key={index}
-              className={`m-1 ${
-                selectedLetter === letter
-                  ? "bg-bleu-ciel text-noir-corbeau underline transform scale-110"
-                  : "bg-vert-naturaliste text-blanc-plume"
-              } hover:bg-bleu-ciel transition-colors duration-300`}
-              onClick={() => filterByLetter(letter)}
-            >
-              {letter}
-            </button>
-          ))}
-        </div>
+        
+        {/* Affichage de l'abécédaire à droite */}
+        <Abecedaire
+          alphabet={alphabet}
+          filterByLetter={filterByLetter}
+          selectedLetter={selectedLetter}
+        />
 
         {/* Affichage des oiseaux */}
         <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
