@@ -6,17 +6,12 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import CursorSize from "../../components/cards/CursorSize";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
-import BirdResult from "../../components/cards/BirdResult";
-
-
-const port = "http://localhost:5000/";
 
 const IdentifierPage = () => {
 
   const navigate = useNavigate();
 
   
-  const [backendData, setBackendData] = useState(null);
   const [motifPlume, setMotifPlume] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -91,8 +86,8 @@ const IdentifierPage = () => {
   return (
     <>
       <div>
-        <div className="bg-vert-naturaliste flex items-center justify-center vh-10">
-          <Typography tag="h2" variant="blanc-plume">
+        <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
+          <Typography tag="h2">
             Identifier ma plume
           </Typography>
         </div>
@@ -143,8 +138,8 @@ const IdentifierPage = () => {
           setSelectedColor={setSelectedColor}
         />
 
-        {/* <Typography tag="h3"> Tailles</Typography>
-        <CursorSize/> */}
+        <Typography tag="h3"> Tailles</Typography>
+        <CursorSize/>
         
         <ContainerButton
           onClickDelete={() => {
@@ -160,7 +155,6 @@ const IdentifierPage = () => {
           }}
         />
       </div>
-      <BirdResult/>
     </>
   );
 };
