@@ -4,6 +4,7 @@ import PaletCard from "../../components/cards/PaletCard"
 import Typography from '../../components/common/Typography';
 import ContainerButton from './ContainerButton';
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
+import CursorSize from "../../components/cards/CursorSize";
 import { useState } from "react";
 
 
@@ -16,10 +17,21 @@ const IdentifierPage = () => {
     { title: "Montagne", logoFileName: "icon-moutain.svg" }
   ];
 
-  const [motifPlume, setMotifPlume] = useState (null);
+  const [motifPlume, setMotifPlume] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedFeatherType, setSelectedFeatherType] = useState(null);
+  // const [selectedFeatherType, setSelectedFeatherType] = useState(null);
   const [selectedPalet, setSelectedPalet] = useState(null);
+  const [selectedFeatherTypes, setSelectedFeatherTypes] = useState([]);
+
+  const handleFeatherTypeSelect = (type) => {
+    setSelectedFeatherTypes((prevSelected) => {
+        if (prevSelected.includes(type)) {
+            return prevSelected.filter((selectedType) => selectedType !== type);
+        } else {
+            return [...prevSelected, type];
+        }
+    });
+};
 
   const plumeData = [
     {
@@ -74,48 +86,85 @@ const IdentifierPage = () => {
     },
   ]
 
+
+
+  const motifData = [
+    { name: "bicolore" },
+    { name: "bordure-vexille" },
+    { name: "encoches" },
+    { name: "lisere-vexille-interne" },
+    { name: "rayee" },
+    { name: "uni" },
+
+  ]
+
+  const sizes = [
+    "12 cm", "12 cm", "14 cm", "14 cm", "14 cm", "19 cm", "19 cm", "21 cm", "23 cm",
+    "24 cm", "24 cm", "27 cm", "28 cm", "28 cm", "29 cm", "32 cm", "33 cm", "34 cm",
+    "35 cm", "35 à 40 cm", "36 cm", "38 cm", "39 cm", "39 cm", "39 cm", "43 cm",
+    "44 cm", "45 cm", "50 cm", "53 cm", "53 à 89 cm", "57 cm", "65 cm", "69 cm",
+    "75 cm", "89 cm", "98 cm", "160 cm"
+  ];
   
 
-    const motifData = [
-      {name:"bicolore"},
-      {name:"bordure-vexille"},
-      {name:"encoches"},
-      {name:"lisere-vexille-interne"},
-      {name:"rayee"},
-      {name:"uni"},
-    
-    ]
-
-    
   return (
     <>
-    <div >
-      <div className="bg-vert-naturaliste flex items-center justify-center vh-10">
-        <Typography tag="h2" variant="blanc-plume">
-          Identifier ma plume
-        </Typography>
-      </div>
-      <div className="flex flex-row items-center justify-center">
-        {locationData.map((location, index) => (
-          <FindingLocationCards  key={index} title={location.title} logoFileName={location.logoFileName}  handleClick={() => setSelectedLocation(location.title)}
-          selected={selectedLocation === location.title} />
-        ))}
-      </div>
-      <div className="flex flex-row items-center justify-center">
-        {motifData.map((motif) => (
-          <FeatherTypeCards key={motif.name} type={motif.name} folder="motifPlume"  handleClick={() => setMotifPlume(motif.name)} selected={motifPlume === motif.name}/>
-        ))}
-      </div>
+      <div >
+        <div className="bg-vert-naturaliste flex items-center justify-center vh-10">
+          <Typography tag="h2" variant="blanc-plume">
+            Identifier ma plume
+          </Typography>
+        </div>
 
-      <div className="flex flex-row items-center justify-center">
+        <Typography tag="h3"> Lieu de trouvaille </Typography>
+        <div className="flex flex-row items-center justify-center">
+          {locationData.map((location, index) => (
+            <FindingLocationCards key={index} title={location.title} logoFileName={location.logoFileName} handleClick={() => setSelectedLocation(location.title)}
+              selected={selectedLocation === location.title} />
+          ))}
+        </div>
+
+        <Typography tag="h3"> Type de plume </Typography>
+        <div className="flex flex-row items-center justify-center">
         {plumeData.map((plume) => (
-          <FeatherTypeCards key={plume.Id_Plumes} type={plume["types de plumes"]} folder="typePlume" handleClick={() => setSelectedFeatherType(plume["types de plumes"])} selected={selectedFeatherType === plume["types de plumes"]}/>
-        ))}
+                    <FeatherTypeCards
+                        key={plume.Id_Plumes}
+                        type={plume["types de plumes"]}
+                        folder="typePlume"
+                        handleSelect={handleFeatherTypeSelect}
+                        selected={selectedFeatherTypes.includes(plume["types de plumes"])}
+                    />
+                ))}
+          {/* {plumeData.map((plume) => (
+            <FeatherTypeCards key={plume.Id_Plumes} type={plume["types de plumes"]} folder="typePlume" handleClick={() => setSelectedFeatherType(plume["types de plumes"])} selected={selectedFeatherType === plume["types de plumes"]} />
+          ))} */}
+          {/* {plumeData.map((plume) => (
+                    <FeatherTypeCards
+                        key={plume.Id_Plumes}
+                        type={plume["types de plumes"]}
+                        folder="typePlume"
+                        handleClick={() => setSelectedFeatherTypes((prevSelected) => [...prevSelected, plume["types de plumes"]])}
+                        selected={selectedFeatherTypes.includes(plume["types de plumes"])}
+                        setSelectedCards={setSelectedFeatherTypes}
+                    />
+                ))} */}
+        </div>
+
+        <Typography tag="h3"> Motif de Plume</Typography>
+        <div className="flex flex-row items-center justify-center">
+          {motifData.map((motif) => (
+            <FeatherTypeCards key={motif.name} type={motif.name} folder="motifPlume" handleClick={() => setMotifPlume(motif.name)} selected={motifPlume === motif.name} />
+          ))}
+        </div>
+
+
+        <Typography tag="h3"> Couleurs</Typography>
+        <PaletCard title="Autre Card" logoFileName="autre-icon.svg" handleClick={() => setSelectedPalet("autre")} selected={selectedPalet === "autre"} />
+
+        <Typography tag="h3"> Tailles</Typography>
+        <CursorSize sizes={sizes} />
+        <ContainerButton onClickDelete={() => console.log("detele")} onClickSeeResults={() => console.log("see result")} />
       </div>
-      <PaletCard title="Autre Card" logoFileName="autre-icon.svg" handleClick={() => setSelectedPalet("autre")} selected={selectedPalet === "autre"} />
-   
-         <ContainerButton onClickDelete={() => console.log("detele")} onClickSeeResults={() => console.log("see result")} />
-    </div>
 
     </>
   );
