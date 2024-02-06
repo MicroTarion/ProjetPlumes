@@ -3,10 +3,11 @@ const Button = ({ handleClick, children }) => {
       <button
         onClick={handleClick}
 
-        className={`w-auto h-16 m-4 p-4 bg-blanc-plume text-ui-vert-naturaliste border border-solid border-noir-corbeau cursor-pointer box-border
+        className={`w-auto h-16 m-4 p-4 bg-blanc-plume text-ui-vert-naturaliste border border-solid border-noir-corbeau cursor-pointer rounded
         hover:bg-800 hover:bg-blanc-tourterelle
-        focus:bg-vert-naturaliste focus:text-ui-blanc-plume box-border
+        focus:bg-vert-naturaliste focus:text-ui-blanc-plume
         `}
+
       >
         {children}
       </button>
