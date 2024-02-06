@@ -1,11 +1,11 @@
 import FindingLocationCards from "../../components/cards/FindingLocationCards";
-import PaletCardMultipleColors from "../../components/cards/PaletCardMultipleColors";
 import Typography from "../../components/common/Typography";
 import ContainerButton from "./ContainerButton";
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
 import CursorSize from "../../components/cards/CursorSize";
 import { useState } from "react";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
+
 
 const IdentifierPage = () => {
   const locationData = [
@@ -84,47 +84,7 @@ const IdentifierPage = () => {
     { name: "uni" },
   ];
 
-  const sizes = [
-    "12 cm",
-    "12 cm",
-    "14 cm",
-    "14 cm",
-    "14 cm",
-    "19 cm",
-    "19 cm",
-    "21 cm",
-    "23 cm",
-    "24 cm",
-    "24 cm",
-    "27 cm",
-    "28 cm",
-    "28 cm",
-    "29 cm",
-    "32 cm",
-    "33 cm",
-    "34 cm",
-    "35 cm",
-    "36 cm",
-    "38 cm",
-    "39 cm",
-    "39 cm",
-    "39 cm",
-    "43 cm",
-    "44 cm",
-    "45 cm",
-    "50 cm",
-    "53 cm",
-    "54 cm",
-    "55 cm",
-    "56 cm",
-    "57 cm",
-    "65 cm",
-    "69 cm",
-    "75 cm",
-    "89 cm",
-    "98 cm",
-    "160 cm",
-  ];
+  const sizes = [];
 
   return (
     <>
@@ -159,16 +119,6 @@ const IdentifierPage = () => {
               selected={selectedFeatherType === plume.Id_Plumes}
             />
           ))}
-          {/* {plumeData.map((plume) => (
-                    <FeatherTypeCards
-                        key={plume.Id_Plumes}
-                        type={plume["types de plumes"]}
-                        folder="typePlume"
-                        handleClick={() => setSelectedFeatherTypes((prevSelected) => [...prevSelected, plume["types de plumes"]])}
-                        selected={selectedFeatherTypes.includes(plume["types de plumes"])}
-                        setSelectedCards={setSelectedFeatherTypes}
-                    />
-                ))} */}
         </div>
 
         <Typography tag="h3"> Motif de Plume</Typography>
@@ -192,7 +142,8 @@ const IdentifierPage = () => {
         />
 
         <Typography tag="h3"> Tailles</Typography>
-        <CursorSize sizes={sizes} />
+        <CursorSize/>
+        
         <ContainerButton
           onClickDelete={() => console.log("detele")}
           onClickSeeResults={() => console.log("see result")}
