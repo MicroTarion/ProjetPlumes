@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import CursorSize from "../../components/cards/CursorSize";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
+import BirdResult from "../../components/cards/BirdResult";
 
 
 const port = "http://localhost:5000/";
@@ -159,6 +160,7 @@ const IdentifierPage = () => {
           }}
         />
       </div>
+      <BirdResult/>
     </>
   );
 };
