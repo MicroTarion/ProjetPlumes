@@ -4,11 +4,12 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Abecedaire from "../../components/common/Abecedaire";
 
 const port = "http://localhost:5000/";
+
 const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
   return (
-    <div className={`mb-${isFirst ? "12" : "8"}`}> {/* Augmentation de la marge pour la première ligne */}
+    <div className={`mb-${isFirst ? "12" : "8"} hover:scale-105 transition-transform duration-300`}>
       {selectedLetter !== "" && isFirst ? (
-        <div className="absolute left-0 top-0 ml-8 font-bold text-lg" style={{marginTop: '-3px'}}> {/* Ajout de la marge supérieure négative */}
+        <div className="absolute left-0 top-0 ml-8 font-bold text-lg" style={{ marginTop: '-6px' }}>
           <u className={`text-ui-bleu-ciel font-bold text-lg`}>
             {selectedLetter}
           </u>
@@ -17,19 +18,19 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
 
       <h4 className="text-blanc-plume font-poppins">{oiseau.nom}</h4>
 
-      <div className="flex space-x-4">
-        <div className="flex flex-col items-center space-y-2 mx-4" style={{marginTop: '20px'}}> {/* Ajout de la marge supérieure pour la première ligne */}
+      <div className="flex">
+        <div className="flex flex-col items-center space-y-2 mx-2 relative">
           <img
-            className="w-auto max-h-[7rem] rounded shadow-lg"
+            className="w-auto max-h-[7rem] rounded shadow-lg z-10"
             src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
             alt={oiseau.NomOiseau}
           />
           <p className="text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
         </div>
 
-        <div className="flex flex-col items-center space-y-2 mx-4" style={{marginTop: '20px'}}> {/* Ajout de la marge supérieure pour la deuxième ligne */}
+        <div className="flex flex-col items-center space-y-2 mx-2 relative">
           <img
-            className="w-auto max-h-[8rem] rounded shadow-lg mr-12"
+            className="w-auto max-h-[8rem] rounded shadow-lg z-10"
             src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
             alt={`Plumes de ${oiseau.NomOiseau}`}
           />
@@ -39,6 +40,8 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
     </div>
   );
 };
+
+
 
 const EspecesPage = () => {
   const [backendData, setBackendData] = useState(null);

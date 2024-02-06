@@ -30,6 +30,9 @@ module.exports = (app) => {
     app.post("/search", cors(corsOptions), (req, res) => {
         oiseauController.search(req, res)
     })
+    app.get("/result", cors(corsOptions), (req, res) => {
+      oiseauController.details(req, res)
+    })
 
     app.get("/search", cors(corsOptions), (req, res) => {
       oiseauController.search(req, res)
