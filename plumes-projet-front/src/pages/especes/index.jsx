@@ -63,26 +63,31 @@ const EspecesPage = () => {
   );
 
   const filterByLetter = (letter) => {
-    setSelectedLetter((prevLetter) =>
-      prevLetter === letter ? "" : letter
-    );
+    setSelectedLetter(letter);
+    setSearchTerm("");
   };
 
-  const isLetterDisplayed = backendData
-    ? backendData.some((oiseaux) =>
-        oiseaux.NomOiseau.toUpperCase().includes(selectedLetter)
-      )
-    : false;
+  const isLetterDisplayed = backendData? backendData.filter((oiseaux) => {
+    return oiseaux.NomOiseau.includes(selectedLetter)}): false;
 
-  const filteredData = backendData
-    ? backendData.filter(
-        (oiseaux) =>
-          (selectedLetter
-            ? oiseaux.NomOiseau.toUpperCase().includes(selectedLetter)
-            : true) &&
-          oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : false;
+    const getFilteredData = () => {
+
+      if(!backendData) return [];
+  
+      if (selectedLetter) {
+        return backendData.filter(
+          (oiseaux) => ( oiseaux.NomOiseau[0].toUpperCase() === selectedLetter))
+  
+      } else if (searchTerm) {
+        return backendData.filter(
+          (oiseaux) => oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      } else {
+        return backendData
+      }
+    }
+  
+    const filteredData = getFilteredData();
 
   return (
     <div>
