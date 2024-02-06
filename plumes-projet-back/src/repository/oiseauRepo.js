@@ -6,11 +6,23 @@ module.exports = class oiseauRepository {
             return (result[0].length != 0 ? result[0] : null);
         })
     }
-    async search(couleurs, motifs, lieux,typePlume) {
-       let query ="SELECT oiseaux.nom, oiseaux.illustration, plumes.illustration AS img_plumes FROM oiseaux INNER JOIN posseder ON posseder.Id_Oiseaux = oiseaux.Id_Oiseaux LEFT JOIN plumes ON posseder.Id_Plumes = plumes.Id_Plumes WHERE posseder.Id_Plumes IN (SELECT colorier.Id_Plumes FROM colorier INNER JOIN couleurs ON colorier.Id_couleurs = couleurs.Id_couleurs INNER JOIN décorer ON colorier.Id_Plumes = décorer.Id_Plumes INNER JOIN plumes ON décorer.Id_Plumes = plumes.Id_Plumes INNER JOIN motifs ON décorer.Id_motifs = motifs.Id_motifs INNER JOIN trouver ON colorier.Id_Plumes = trouver.Id_Plumes INNER JOIN lieux_de_trouvaille ON trouver.Id_lieux_de_trouvaille = lieux_de_trouvaille.Id_lieux_de_trouvaille"
+
+    
+    async search(couleurs, motifs, lieux,typePlume,taille) {
+       let query ="SELECT oiseaux.nom, oiseaux.illustration, plumes.illustration AS img_plumes FROM oiseaux INNER JOIN posseder ON posseder.Id_Oiseaux = oiseaux.Id_Oiseaux LEFT JOIN plumes ON posseder.Id_Plumes = plumes.Id_Plumes WHERE oiseau posseder.Id_Plumes IN (SELECT colorier.Id_Plumes FROM colorier INNER JOIN couleurs ON colorier.Id_couleurs = couleurs.Id_couleurs INNER JOIN décorer ON colorier.Id_Plumes = décorer.Id_Plumes INNER JOIN plumes ON décorer.Id_Plumes = plumes.Id_Plumes INNER JOIN motifs ON décorer.Id_motifs = motifs.Id_motifs INNER JOIN trouver ON colorier.Id_Plumes = trouver.Id_Plumes INNER JOIN lieux_de_trouvaille ON trouver.Id_lieux_de_trouvaille = lieux_de_trouvaille.Id_lieux_de_trouvaille"
 
         // Vérification au cas où valeures nulles
         const whereConditions = [];
+        let taillemax,taillemin
+        if (taille == 0 || null) {
+            taillemax = 0;
+            taillemin = 500;
+
+        }
+        else{
+            taillemax = taille;
+            taillemin = taille;
+        }
 
         
         if (couleurs !== null) whereConditions.push("couleurs.nom LIKE ?");
@@ -23,7 +35,7 @@ module.exports = class oiseauRepository {
         query += `);`;
         
         // Filtrer les valeurs nulles des paramètres
-        const params = [couleurs, motifs, lieux,typePlume].filter(val => val !== null);
+        const params = [taillemin,taillemax,couleurs, motifs, lieux,typePlume].filter(val => val !== null);
         console.log(params);
         console.log(query);
         return await con.promise().query(query,params).then((result)=>{
@@ -33,6 +45,7 @@ module.exports = class oiseauRepository {
 
     
     }
+    
     
 
 }
