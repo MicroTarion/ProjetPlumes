@@ -2,7 +2,7 @@ import FindingLocationCards from "../../components/cards/FindingLocationCards";
 import Typography from "../../components/common/Typography";
 import ContainerButton from "./ContainerButton";
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import CursorSize from "../../components/cards/CursorSize";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
@@ -13,6 +13,14 @@ const port = "http://localhost:5000/";
 const IdentifierPage = () => {
 
   const navigate = useNavigate();
+
+  
+  const [backendData, setBackendData] = useState(null);
+  const [motifPlume, setMotifPlume] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedFeatherType, setSelectedFeatherType] = useState(null);
+  
   const locationData = [
     { title: "Campagne", logoFileName: "icon-countryside.svg" },
     { title: "Ville", logoFileName: "icon-ville.svg" },
@@ -20,14 +28,6 @@ const IdentifierPage = () => {
     { title: "Eau", logoFileName: "icon-aquatic.svg" },
     { title: "Montagne", logoFileName: "icon-moutain.svg" },
   ];
-
-  const [backendData, setBackendData] = useState(null);
-  const [motifPlume, setMotifPlume] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  // const [selectedFeatherType, setSelectedFeatherType] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedFeatherType, setSelectedFeatherType] = useState(null);
-
   const plumeData = [
     {
       Id_Plumes: 1,
@@ -50,28 +50,28 @@ const IdentifierPage = () => {
       "types de plumes": "Rémige primaire E",
     },
     {
-      "Id_Plumes": 5,
-      "illustration": "plumes-chouette-hulotte",
+      Id_Plumes: 5,
+      illustration: "plumes-chouette-hulotte",
       "types de plumes": "Rémige secondaire E"
     },
     {
-      "Id_Plumes": 6,
-      "illustration": "plumes-hibou-petit-duc",
+      Id_Plumes: 6,
+      illustration: "plumes-hibou-petit-duc",
       "types de plumes": "Rémige secondaire I"
     },
     {
-      "Id_Plumes": 7,
-      "illustration": "plumes-tourterelle-des-bois",
+      Id_Plumes: 7,
+      illustration: "plumes-tourterelle-des-bois",
       "types de plumes": "Sous caudale"
     },
     {
-      "Id_Plumes": 8,
-      "illustration": "plumes-tourterelle-turque",
+      Id_Plumes: 8,
+      illustration: "plumes-tourterelle-turque",
       "types de plumes": "Sus caudale"
     },
     {
-      "Id_Plumes": 9,
-      "illustration": "plumes-buse-variable",
+      Id_Plumes: 9,
+      illustration: "plumes-buse-variable",
       "types de plumes": "Grande CP"
     },
   ];
@@ -142,12 +142,21 @@ const IdentifierPage = () => {
           setSelectedColor={setSelectedColor}
         />
 
-        <Typography tag="h3"> Tailles</Typography>
-        <CursorSize/>
+        {/* <Typography tag="h3"> Tailles</Typography>
+        <CursorSize/> */}
         
         <ContainerButton
-          onClickDelete={() => console.log("detele")}
-          onClickSeeResults={() => console.log("see result")}
+          onClickDelete={() => {
+            console.log("detele")
+            setSelectedFeatherType(null);
+            setSelectedLocation(null);
+            setMotifPlume(null);
+            setSelectedColor(null);
+          }}
+          onClickSeeResults={() =>{
+            console.log("see result")
+            navigate('/resultat', { state: { selectedLocation: selectedLocation, selectedFeatherType: selectedFeatherType, motifPlume: motifPlume, selectedColor: selectedColor } })
+          }}
         />
       </div>
     </>
