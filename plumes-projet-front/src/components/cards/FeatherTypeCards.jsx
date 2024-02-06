@@ -1,35 +1,29 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const transformSlug = (type) => {
-    return type.toLowerCase().replaceAll(' ', '-').replace('é', 'e');
+  return type.toLowerCase().replaceAll(" ", "-").replace("é", "e");
 };
 
-const FeatherTypeCards = ({ type, folder, handleSelect, selected }) => {
-    const [active, setActive] = useState(false);
+const FeatherTypeCards = ({ type, folder, handleClick, selected }) => {
+  const [active, setActive] = useState(false);
 
-    const slug = transformSlug(type);
+  const slug = transformSlug(type);
+  //replace space by - and convert to lower case and replace "é" by "e" to match the file name "Rémige secondaire E" => "remige-secondaire-e.svg
+  const handleActive = () => {
+    setActive(true);
+  };
 
-    const handleActive = () => {
-        setActive(true);
-    };
+  const handleBlur = () => {
+    setActive(false);
+  };
 
-    const handleBlur = () => {
-        setActive(false);
-    };
-
-    const handleItemClick = () => {
-        handleSelect(type);
-    };
-
-    return (
-        <button onBlur={handleBlur} onFocus={handleActive} onClick={handleItemClick}>
-            <img
-                src={`/cards/${folder}/card-${active ? `${slug}-actif` : slug}.svg`}
-                alt={type}
-                className={selected ? 'selected' : ''}
-            />
-        </button>
-    );
+  const activeOrInactiveSlug = active ? `${slug}-actif` : slug;
+  const finalSlug = selected ? `${slug}-actif` : activeOrInactiveSlug;
+  return (
+    <button onBlur={handleBlur} onFocus={handleActive} onClick={handleClick}>
+      <img src={`/cards/${folder}/card-${finalSlug}.svg`} alt={type} />
+    </button>
+  );
 };
 
 export default FeatherTypeCards;
