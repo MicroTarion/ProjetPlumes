@@ -18,7 +18,7 @@ const Typography = ({ children, tag, variant, reverse, customClasses }) => {
     
     
     
-    "font-poppins text-lg text-blanc-plume": tag === "h3",
+    "font-poppins text-lg text-ui-vert-naturaliste": tag === "h3",
     [customClasses]: customClasses,
   });
 
