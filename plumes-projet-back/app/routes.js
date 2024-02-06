@@ -31,6 +31,10 @@ module.exports = (app) => {
         oiseauController.search(req, res)
     })
 
+    app.get("/search", cors(corsOptions), (req, res) => {
+      oiseauController.search(req, res)
+  })
+
     app.get('/api/plume', cors(corsOptions), (req, res) => {
         console.log("plumeController", plumeController);
         plumeController.listAll(req, res)
