@@ -3,7 +3,7 @@ let oiseauController = require("../src/controller/oiseauController.js");
 let plumeController = require("../src/controller/plumeController.js");
 
 
-var whitelist = [process.env.HTTP_SERVER, process.env.HTTP_CLIENT]
+var whitelist = [process.env.HTTP_CLIENT]
 var corsOptions = {
   origin: function (origin, callback) {
       if (whitelist.indexOf(origin) !== -1 || !origin) {
@@ -11,6 +11,7 @@ var corsOptions = {
       callback(console.log('Connection autorisée'), true)
     } else {
         console.log(origin);
+        console.log(whitelist.indexOf(origin))
       callback(new Error('Not allowed by CORS'));
     }
   }

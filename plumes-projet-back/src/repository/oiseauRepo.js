@@ -42,10 +42,6 @@ module.exports = class oiseauRepository {
             
             return(result)
         })
-
-    
     }
-    
-    
 
 }
