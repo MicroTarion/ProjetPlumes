@@ -14,7 +14,6 @@ class plumeController{
                 res.json(result);
             })
         }
-    
     }
 
 module.exports = new plumeController();

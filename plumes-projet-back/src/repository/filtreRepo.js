@@ -5,8 +5,8 @@ module.exports = class filtreRepository {
             return (result[0].length != 0 ? result[0] : null);
         })
     }
-    async getAllPlumes() {
-        return await con.promise().query("SELECT * from plumes").then((result) => {
+    async getAllTypesdePlumes() {
+        return await con.promise().query("SELECT DISTINCT types_de_plumes from plumes").then((result) => {
             return (result[0].length != 0 ? result[0] : null);
         })
     }
@@ -15,7 +15,7 @@ module.exports = class filtreRepository {
             return (result[0].length != 0 ? result[0] : null);
         })
     }
-    async getAllCouleur() {
+    async getAllCouleurs() {
         return await con.promise().query("SELECT nom from couleur").then((result) => {
             return (result[0].length != 0 ? result[0] : null);
         })

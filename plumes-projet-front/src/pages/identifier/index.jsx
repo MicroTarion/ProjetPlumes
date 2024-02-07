@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import CursorSize from "../../components/cards/CursorSize";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
 
-
 const port = "http://localhost:5000/";
 const IdentifierPage = () => {
 
