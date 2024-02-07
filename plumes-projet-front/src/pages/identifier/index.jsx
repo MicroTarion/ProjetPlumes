@@ -129,7 +129,9 @@ const IdentifierPage = () => {
     <>
       <div>
         <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
-          <Typography tag="h2">
+
+          <Typography tag="h2" variant="blanc-plume">
+
             Identifier ma plume
           </Typography>
         </div>

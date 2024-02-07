@@ -19,27 +19,28 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
       <h4 className="text-blanc-plume font-poppins">{oiseau.nom}</h4>
 
       <div className="flex">
-        <div className="flex flex-col items-center space-y-2 mx-2 relative">
+        <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
           <img
             className="w-auto max-h-[7rem] rounded shadow-lg z-10"
             src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
             alt={oiseau.NomOiseau}
           />
-          <p className="text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
+          <p className="text-xs text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
         </div>
 
-        <div className="flex flex-col items-center space-y-2 mx-2 relative">
+        <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
           <img
             className="w-auto max-h-[8rem] rounded shadow-lg z-10"
             src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
             alt={`Plumes de ${oiseau.NomOiseau}`}
           />
-          <p className="text-ui-blanc-plume font-poppins">{`Plumes de ${oiseau.NomOiseau}`}</p>
+          <p className="text-xs text-ui-blanc-plume font-poppins">{`Plumes de ${oiseau.NomOiseau}`}</p>
         </div>
       </div>
     </div>
   );
 };
+
 
 
 
