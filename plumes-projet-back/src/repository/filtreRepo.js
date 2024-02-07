@@ -1,7 +1,7 @@
 const con = require('../../app/database_sql');
 module.exports = class filtreRepository {
         async getAllLieux() {
-        return await con.promise().query("SELECT nom from lieux_de_trouvaille").then((result) => {
+        return await con.promise().query("SELECT `nom`, `logoFileName` from lieux_de_trouvaille").then((result) => {
             return (result[0].length != 0 ? result[0] : null);
         })
     }
@@ -16,7 +16,7 @@ module.exports = class filtreRepository {
         })
     }
     async getAllCouleurs() {
-        return await con.promise().query("SELECT nom from couleur").then((result) => {
+        return await con.promise().query("SELECT nom from couleurs").then((result) => {
             return (result[0].length != 0 ? result[0] : null);
         })
     }
