@@ -2,13 +2,23 @@ import FindingLocationCards from "../../components/cards/FindingLocationCards";
 import Typography from "../../components/common/Typography";
 import ContainerButton from "./ContainerButton";
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import CursorSize from "../../components/cards/CursorSize";
-import { useState } from "react";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
-import BirdResult from "../../components/cards/BirdResult";
 
-
+const port = "http://localhost:5000/";
 const IdentifierPage = () => {
+
+  const navigate = useNavigate();
+
+  const [backendData, setBackendData] = useState(null);
+  const [Id_Oiseaux, setId_Oiseaux] = useState([]);
+  const [motifPlume, setMotifPlume] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedFeatherType, setSelectedFeatherType] = useState(null);
+  
   const locationData = [
     { title: "Campagne", logoFileName: "icon-countryside.svg" },
     { title: "Ville", logoFileName: "icon-ville.svg" },
@@ -16,13 +26,6 @@ const IdentifierPage = () => {
     { title: "Eau", logoFileName: "icon-aquatic.svg" },
     { title: "Montagne", logoFileName: "icon-moutain.svg" },
   ];
-
-  const [motifPlume, setMotifPlume] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  // const [selectedFeatherType, setSelectedFeatherType] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedFeatherType, setSelectedFeatherType] = useState(null);
-
   const plumeData = [
     {
       Id_Plumes: 1,
@@ -46,33 +49,28 @@ const IdentifierPage = () => {
     },
     {
       Id_Plumes: 5,
-      illustration: "plumes-pigeon-ramier",
-      "types de plumes": "Rémige secondaire I",
+      illustration: "plumes-chouette-hulotte",
+      "types de plumes": "Rémige secondaire E"
     },
     {
       Id_Plumes: 6,
-      illustration: "plumes-chouette-hulotte",
-      "types de plumes": "Rémige secondaire E",
+      illustration: "plumes-hibou-petit-duc",
+      "types de plumes": "Rémige secondaire I"
     },
     {
       Id_Plumes: 7,
-      illustration: "plumes-hibou-petit-duc",
-      "types de plumes": "Rémige secondaire I",
+      illustration: "plumes-tourterelle-des-bois",
+      "types de plumes": "Sous caudale"
     },
     {
       Id_Plumes: 8,
-      illustration: "plumes-tourterelle-des-bois",
-      "types de plumes": "Sous caudale",
+      illustration: "plumes-tourterelle-turque",
+      "types de plumes": "Sus caudale"
     },
     {
       Id_Plumes: 9,
-      illustration: "plumes-tourterelle-turque",
-      "types de plumes": "Sus caudale",
-    },
-    {
-      Id_Plumes: 10,
       illustration: "plumes-buse-variable",
-      "types de plumes": "Grande CP",
+      "types de plumes": "Grande CP"
     },
   ];
 
@@ -87,11 +85,52 @@ const IdentifierPage = () => {
 
   const sizes = [];
 
+  useEffect(() => {
+    const getData = () => {
+      fetch(port + "list")
+        .then((response) => response.json())
+        .then((data) => {
+          setBackendData(data);
+        });
+    };
+
+    getData();
+  }, []);
+
+    const postData = () => {
+      console.log(JSON.stringify({
+        motif: motifPlume,
+        lieu: selectedLocation,
+        couleur: selectedColor,
+        typePlume: selectedFeatherType,
+      }));
+      fetch(port + "search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          motif: motifPlume,
+          lieu: selectedLocation,
+          couleur: selectedColor,
+          typePlume: selectedFeatherType,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setId_Oiseaux(data);
+        })
+    }
+
+
   return (
     <>
       <div>
-        <div className="bg-vert-naturaliste flex items-center justify-center vh-10">
+        <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
+
           <Typography tag="h2" variant="blanc-plume">
+
             Identifier ma plume
           </Typography>
         </div>
@@ -146,11 +185,20 @@ const IdentifierPage = () => {
         <CursorSize/>
         
         <ContainerButton
-          onClickDelete={() => console.log("detele")}
-          onClickSeeResults={() => console.log("see result")}
+          onClickDelete={() => {
+            console.log("detele")
+            setSelectedFeatherType(null);
+            setSelectedLocation(null);
+            setMotifPlume(null);
+            setSelectedColor(null);
+          }}
+          onClickSeeResults={() => {
+            postData();
+            navigate('/resultat', { state: { selectedLocation: selectedLocation, selectedFeatherType: selectedFeatherType, motifPlume: motifPlume, selectedColor: selectedColor } })
+            console.log(Id_Oiseaux);
+          }}
         />
       </div>
-      <BirdResult/>
     </>
   );
 };

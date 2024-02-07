@@ -3,14 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Abecedaire from "../../components/common/Abecedaire";
 
-
 const port = "http://localhost:5000/";
 
 const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
   return (
-    <div className="mb-8">
+    <div className={`mb-${isFirst ? "12" : "8"} hover:scale-105 transition-transform duration-300`}>
       {selectedLetter !== "" && isFirst ? (
-        <div className="absolute left-0 top-8 ml-8 font-bold text-lg">
+        <div className="absolute left-0 top-0 ml-8 font-bold text-lg" style={{ marginTop: '-6px' }}>
           <u className={`text-ui-bleu-ciel font-bold text-lg`}>
             {selectedLetter}
           </u>
@@ -19,28 +18,31 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
 
       <h4 className="text-blanc-plume font-poppins">{oiseau.nom}</h4>
 
-      <div className="grid grid-cols-2 gap-4 items-center">
-        <div className="flex flex-col items-center space-y-2">
+      <div className="flex">
+        <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
           <img
-            className="w-[40rem] h-[10rem] rounded shadow-lg"
+            className="w-auto max-h-[7rem] rounded shadow-lg z-10"
             src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
             alt={oiseau.NomOiseau}
           />
-          <p className="text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
+          <p className="text-xs text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
         </div>
 
-        <div className="flex flex-col items-center space-y-2">
+        <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
           <img
-            className="w-[10rem] h-[10rem] rounded shadow-lg"
+            className="w-auto max-h-[8rem] rounded shadow-lg z-10"
             src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
             alt={`Plumes de ${oiseau.NomOiseau}`}
           />
-          <p className="text-ui-blanc-plume font-poppins">{`Plumes de ${oiseau.NomOiseau}`}</p>
+          <p className="text-xs text-ui-blanc-plume font-poppins">{`Plumes de ${oiseau.NomOiseau}`}</p>
         </div>
       </div>
     </div>
   );
 };
+
+
+
 
 const EspecesPage = () => {
   const [backendData, setBackendData] = useState(null);
@@ -130,7 +132,7 @@ const EspecesPage = () => {
         />
 
         {/* Affichage des oiseaux */}
-        <div className="grid grid-cols-3 gap-8 mx-auto mt-8">
+        <div className="grid grid-cols-3 gap-0 mx-auto mt-4">
           {filteredData
             ? filteredData.map((oiseau, index) => (
                 <OiseauEtPlumeCard
