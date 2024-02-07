@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
-
+import clsx from "clsx";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
   const paths = [
     {
       path: "/",
@@ -20,25 +21,84 @@ const Header = () => {
     {
       path: "/especes",
       name: "Especes",
-      icon: "/logo/IconEspece.svg",
+      icon: "/logo/iconEspeces.svg",
     },
   ];
 
   return (
     <>
-      <header className="flex justify-between items-center bg-noir-corbeau p-4">
+      <header className="hidden md:flex justify-between items-center bg-noir-corbeau p-4">
         <nav className="mx-auto">
           <ul className="flex gap-10">
             {paths.map((element) => (
               <li key={element.name} className="text-center">
-
-                <Link to={element.path} className="text-ui-blanc-plume hover:text-gray-300">
-
+                <Link
+                  to={element.path}
+                  className="text-ui-blanc-plume hover:text-gray-300"
+                >
                   <div>{element.name}</div>
-                  {element.icon && <img src={element.icon} alt={element.name} className="icon mt-2 mx-auto" />}
+                  {element.icon && (
+                    <img
+                      src={element.icon}
+                      alt={element.name}
+                      className="icon mt-2 mx-auto"
+                    />
+                  )}
                 </Link>
               </li>
             ))}
+          </ul>
+        </nav>
+      </header>
+      <header className="fixed bottom-0 left-0 h-20 right-0 flex bg-noir-corbeau p-2 md:hidden">
+        <nav className="w-full">
+          <ul className="flex gap-10 justify-around w-full">
+            {paths.map((element) => {
+              if (element.path === "/") {
+                return null;
+              }
+
+              let isActive = location.pathname === element.path;
+
+              const classes = clsx({
+                "transition-all z-10 absolute bg-white flex justify-center items-center h-12 w-16 top-0 border-4 border-ui-noir-corbeau": true,
+                "-top-6 ": isActive,
+              });
+
+              return (
+                <li key={element.name} className="text-center relative">
+                  <Link to={element.path} className="text-ui-blanc-plume">
+                    {element.icon && (
+                      <>
+                        <div
+                          className={classes}
+                          style={{ borderRadius: "40px" }}
+                        >
+                          <img
+                            src={element.icon}
+                            alt={element.name}
+                            className="iconmx-auto"
+                            style={{ filter: "invert(1)" }}
+                          />
+                        </div>
+                        <div
+                          className="transition-all relative flex justify-center items-center h-12 w-16 z-0"
+                          style={{ borderRadius: "40px" }}
+                        >
+                          <img
+                            src={element.icon}
+                            alt={element.name}
+                            className="iconmx-auto"
+                            style={{ filter: "invert(1)" }}
+                          />
+                        </div>
+                      </>
+                    )}
+                    <div className="text-xs ">{element.name}</div>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </header>

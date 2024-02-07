@@ -1,27 +1,23 @@
 import React from 'react';
-import BirdList from './BirdList';
 
-const AlphabeticalList = ({ birdData }) => {
-  // Regrouper les oiseaux par la première lettre
-  const birdsByAlphabet = {};
-  birdData.forEach((bird) => {
-    const firstLetter = bird.name.charAt(0).toUpperCase();
-    if (!birdsByAlphabet[firstLetter]) {
-      birdsByAlphabet[firstLetter] = [];
-    }
-    birdsByAlphabet[firstLetter].push(bird.name);
-  });
-
+const Abecedaire = ({ alphabet, filterByLetter, selectedLetter }) => {
   return (
-    <div>
-      {Object.keys(birdsByAlphabet).map((letter) => (
-        <div key={letter}>
-          <h2>{letter}</h2>
-          <BirdList birds={birdsByAlphabet[letter]} />
-        </div>
+    <div className="fixed inset-y-0 right-0 flex flex-col items-end p-1 bg-ui-vert-naturaliste">
+      {alphabet.map((letter, index) => (
+        <button
+          key={index}
+          className={`m-0.5 text-xs ${
+            selectedLetter === letter
+              ? "font-bold text-ui-bleu-ciel underline transform scale-110"
+              : "text-ui-bleu-ciel"
+          } hover:bg-bleu-ciel transition-colors duration-300`}
+          onClick={() => filterByLetter(letter)}
+        >
+          {letter}
+        </button>
       ))}
     </div>
   );
 };
 
-export default AlphabeticalList;
+export default Abecedaire;
