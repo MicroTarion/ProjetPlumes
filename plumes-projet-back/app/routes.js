@@ -1,6 +1,7 @@
 const cors = require('cors');
 let oiseauController = require("../src/controller/oiseauController.js");
 let plumeController = require("../src/controller/plumeController.js");
+let filtreController = require('../src/controller/filtreController.js');
 
 
 var whitelist = [process.env.HTTP_SERVER, process.env.HTTP_CLIENT]
@@ -31,6 +32,20 @@ module.exports = (app) => {
     })
     app.get("/result", cors(corsOptions), (req, res) => {
       oiseauController.details(req, res)
+    })
+
+    //Recup des filtres en BDD
+    app.get("/motifs", cors(corsOptions), (req, res) => {
+      filtreController.listMotifs(req, res)
+    })
+    app.get("/couleurs", cors(corsOptions), (req, res) => {
+      filtreController.listCouleurs(req, res)
+    })
+    app.get("/lieux", cors(corsOptions), (req, res) => {
+      filtreController.listLieux(req, res)
+    })
+    app.get("/types", cors(corsOptions), (req, res) => {
+      filtreController.listTypes(req, res)
     })
 
     app.get('/api/plume', cors(corsOptions), (req, res) => {
