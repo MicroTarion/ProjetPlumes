@@ -26,6 +26,7 @@ svg path {
 }
 
 @font-face {
-  font-family: "f37-attila", sans-serif;
-  src: url("./assets/fonts/F37 Attila/F37Attila-Bold.ttf") format("truetype");
+  font-family: 'f37-attila', sans-serif;
+  src: url('./assets/fonts/F37 Attila/F37Attila-Bold.ttf') format('truetype');
 }
+

@@ -8,7 +8,7 @@ const ResultatPage = () => {
 
  
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-vert-naturaliste bg-opacity-50">
+        <div className="flex flex-col items-center justify-center bg-vert-naturaliste bg-opacity-50">
             <BirdResult />
         </div>
     );

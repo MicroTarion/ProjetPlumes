@@ -1,4 +1,5 @@
 import DatavizCards from "./DatavizCards";
+import TitleBarre from "../common/TitleBarre";
 import { ReactSVG } from "react-svg";
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -9,6 +10,7 @@ const port = "http://localhost:5000/";
 const BirdResult = () => {
 
   const imagePath = `/lieux/icon-ville.svg`;
+  const vectorPath = `/logo/vector.svg`;
 
   const location = useLocation();
 
@@ -72,17 +74,14 @@ const BirdResult = () => {
 
   return (
     <>
-    <div className="bg-blanc-tourterelle border border-noir-corbeau w-full h-[10vh] flex flex-row items-center">
-      <img src="logo/vector.svg" alt="logo pour retour aux résultats" className="m-6 color-ui-vert-naturaliste" />
-      <h3 className="font-poppins font-semibold text-ui-vert-naturaliste">Retour aux résultats</h3>
-    </div>
+    <TitleBarre />
 
-    <div className="flex flex-col items-center text-ui-blanc-plume bg-vert-naturaliste w-full lg:w-3/5 xl:w-4/5 rounded-bl-xl rounded-br-xl">
+    <div className="flex flex-col items-center text-ui-blanc-plume bg-vert-naturaliste w-full lg:w-[70vw] xl:w-4/5 rounded-bl-xl rounded-br-xl mb-8">
       <div className="flex flex-col items-center m-0">
 
         <div className="relative">
           <img
-            className="w-[50vh] h-[40vh] object-cover border border-noir rounded-bl-xl rounded-br-xl"
+            className="w-[92vw] h-[35vh] lg:w-[60vw] lg:h-[50vh] xl:w-[50vw] xl:h-[60vh]  object-cover border border-noir rounded-bl-xl rounded-br-xl"
             src="main-image-url.jpg"
             alt="Main Bird Image"
           />
@@ -96,8 +95,8 @@ const BirdResult = () => {
           </div>
         </div>
 
-        <div className="text-ui-vert-naturaliste bg-blanc-tourterelle p-4 lg:p-6 w-[40vh] h-[20vh] object-cover border border-noir rounded-bl-xl rounded-br-xl">
-          <h1 className="font-f37-attila text-xl">Geai des bois</h1>
+        <div className="text-ui-vert-naturaliste bg-blanc-tourterelle p-4 lg:p-6 w-[82vw] h-[18vh] lg:w-[45vw] lg:h-[19vh] xl:w-[40vw] xl:h-[20vh] object-cover border border-noir rounded-bl-xl rounded-br-xl">
+          <h1 className="font-quantico text-xl">Geai des bois</h1>
           <h4 className="font-poppins text-0.8125rem italic">nom scientifique</h4>
           <p className="text-poppins text-0.8125rem">Famille :</p>
           <p className="text-poppins text-0.8125rem">Ordre :</p>

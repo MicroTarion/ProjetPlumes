@@ -46,6 +46,7 @@ export default {
       fontFamily: {
         "f37-attila": ["F37Attila", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
+        quantico: ["Quantico", "sans-serif"],
       },
       fontWeight: {
         medium: "500",
