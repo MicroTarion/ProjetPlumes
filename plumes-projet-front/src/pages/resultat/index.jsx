@@ -1,17 +1,63 @@
-import BirdResult from "../../components/cards/BirdResult";
+import TitleBarre from "../../components/common/TitleBarre";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 
-const port = "http://localhost:5000/";
 
+const OiseauEtPlumeCard = ({ oiseau, isFirst }) => {
+
+  return (
+    <div className={`mb-${isFirst ? "12" : "8"} hover:scale-105 transition-transform duration-300`}>
+
+      <div className="flex">
+        <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
+          <img
+            className="w-auto max-h-[7rem] rounded shadow-lg z-10"
+            src={`public/illustrations/illustrations-oiseaux/${oiseau.illustration}.jpeg`}
+            alt={oiseau.nom}
+          />
+          <p className="text-xs text-ui-blanc-plume font-poppins">{` ${oiseau.nom}`}</p>
+        </div>
+
+        <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
+          <img
+            className="w-auto max-h-[8rem] rounded shadow-lg z-10"
+            src={`public/illustrations/plumes-oiseaux/${oiseau.img_plumes}.jpg`}
+            alt={`Plumes de ${oiseau.nom}`}
+          />
+          <p className="text-xs text-ui-blanc-plume font-poppins">{`Plumes de ${oiseau.nom}`}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 const ResultatPage = () => {
 
- 
-    return (
-        <div className="flex flex-col items-center justify-center h-screen bg-vert-naturaliste bg-opacity-50">
-            <BirdResult />
-        </div>
-    );
-};
+  const location = useLocation();
+  const navigate = useNavigate();
 
-export default ResultatPage;
+  console.log(location.state.oiseaux[0]);
+
+  return (
+    <>
+      <div>
+        <TitleBarre />
+        <div className="flex bg-vert-naturaliste text-blanc-plume relative">
+          <div className="grid grid-cols-2 gap-0 mx-auto mt-4">
+            {location && location.state.oiseaux
+              ? location.state.oiseaux[0].map((oiseau, index) => (
+                <OiseauEtPlumeCard
+                  key={oiseau.Id_oiseaux}
+                  oiseau={oiseau}
+                  isFirst={index === 0}
+                />
+              ))
+              : null}
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default ResultatPage

@@ -41,7 +41,6 @@ module.exports = class oiseauRepository {
         // Filtrer les valeurs nulles des paramètres*
         const params = [borneinf,bornesup,couleurs, motifs, lieux,typePlume].filter(val => val !== null);
         console.log(params);
-        console.log(query);
         return await con.promise().query(query,params).then((result)=>{
             
             return(result)
