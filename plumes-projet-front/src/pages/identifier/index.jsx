@@ -1,6 +1,5 @@
 import FindingLocationCards from "../../components/cards/FindingLocationCards";
 import Typography from "../../components/common/Typography";
-import TitleBarre from "../../components/common/TitleBarre";
 import ContainerButton from "./ContainerButton";
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
 import { useState, useEffect } from "react";
@@ -44,7 +43,7 @@ const IdentifierPage = () => {
     getData();
   }, []);
 
-  const sizes = [];
+const sizes = [];
 useEffect(() => {
   const postData = () => {
     fetch(port + "search", {
@@ -72,8 +71,12 @@ useEffect(() => {
   return (
     <>
       <div>
+        <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
 
-        <TitleBarre reverse={true} />
+          <Typography tag="h2" variant="blanc-plume">
+            Identifier ma plume
+          </Typography>
+        </div>
 
         <Typography tag="h3"> Lieu de trouvaille </Typography>
         <div className="flex flex-row items-center justify-center">
@@ -134,6 +137,8 @@ useEffect(() => {
           }}
           onClickSeeResults={() => {
             console.log(oiseaux);
+
+            navigate('/resultat', { state: { selectedLocation: selectedLocation, selectedFeatherType: selectedFeatherType, motifPlume: motifPlume, selectedColor: selectedColor, oiseaux: oiseaux } })
           }}
         />
       </div>
