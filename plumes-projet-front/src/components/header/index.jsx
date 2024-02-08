@@ -61,9 +61,14 @@ const Header = () => {
               let isActive = location.pathname === element.path;
 
               const classes = clsx({
-                "transition-all z-10 absolute bg-white flex justify-center items-center h-12 w-16 top-0 border-4 border-ui-noir-corbeau": true,
-                "-top-6 ": isActive,
+                "transition-all z-10 absolute bg-white flex justify-center items-center h-12 w-16 top-0 border-4 border-ui-noir-corbeau overflow-hidden": true,
+                "-top-8 ": isActive,
               });
+
+              const textStyles = {
+                transform: isActive ? "scale(1.05)" : "scale(1)",
+                marginTop: isActive ? "-4px" : "0",
+              };
 
               return (
                 <li key={element.name} className="text-center relative">
@@ -72,29 +77,38 @@ const Header = () => {
                       <>
                         <div
                           className={classes}
-                          style={{ borderRadius: "40px" }}
+                          style={{
+                            borderRadius: "40px",
+                            transform: isActive ? "scale(1.2)" : "scale(1)",
+                            marginTop: isActive ? "-4px" : "0",
+                          }}
                         >
                           <img
                             src={element.icon}
                             alt={element.name}
-                            className="iconmx-auto"
+                            className="icon mx-auto"
                             style={{ filter: "invert(1)" }}
                           />
                         </div>
                         <div
-                          className="transition-all relative flex justify-center items-center h-12 w-16 z-0"
-                          style={{ borderRadius: "40px" }}
+                          className="transition-all relative flex justify-center items-center h-12 w-16 z-0 border-2 border-ui-noir-corbeau"
+                          style={{
+                            borderRadius: "40px",
+                            marginTop: isActive ? "-4px" : "0",
+                          }}
                         >
                           <img
                             src={element.icon}
                             alt={element.name}
-                            className="iconmx-auto"
+                            className="icon mx-auto"
                             style={{ filter: "invert(1)" }}
                           />
                         </div>
                       </>
                     )}
-                    <div className="text-xs ">{element.name}</div>
+                    <div className="text-xs" style={textStyles}>
+                      {element.name}
+                    </div>
                   </Link>
                 </li>
               );

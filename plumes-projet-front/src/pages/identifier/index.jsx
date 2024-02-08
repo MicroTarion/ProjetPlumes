@@ -1,5 +1,6 @@
 import FindingLocationCards from "../../components/cards/FindingLocationCards";
 import Typography from "../../components/common/Typography";
+import TitleBarre from "../../components/common/TitleBarre";
 import ContainerButton from "./ContainerButton";
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
 import { useState, useEffect } from "react";
@@ -71,13 +72,8 @@ useEffect(() => {
   return (
     <>
       <div>
-        <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
 
-          <Typography tag="h2" variant="blanc-plume">
-
-            Identifier ma plume
-          </Typography>
-        </div>
+        <TitleBarre reverse={true} />
 
         <Typography tag="h3"> Lieu de trouvaille </Typography>
         <div className="flex flex-row items-center justify-center">
