@@ -1,10 +1,9 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Typography from "../common/Typography";
 
 const TitleBarre = () => {
   const location = useLocation();
   const currentPath = location.pathname;
-  const navigate = useNavigate();
 
   let variant = "noir-corbeau";
   let text = "Lexique de la plume";
@@ -26,7 +25,7 @@ const TitleBarre = () => {
   } else if (currentPath === "/resultat") {
     variant = "vert-naturaliste";
     text = (
-      <div className="flex items-center" onClick={() => navigate("/identifier")}>
+      <div className="flex items-center">
         <img
           src="logo/vector.svg"
           alt="logo pour retour aux résultats"
