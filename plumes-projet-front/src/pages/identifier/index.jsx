@@ -13,7 +13,7 @@ const IdentifierPage = () => {
   const navigate = useNavigate();
 
   const [backendData, setBackendData] = useState(null);
-  const [Id_Oiseaux, setId_Oiseaux] = useState([]);
+  const [oiseaux, setOiseaux] = useState([]);
   const [motifPlume, setMotifPlume] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -33,7 +33,7 @@ const IdentifierPage = () => {
                   await fetch(port + "lieux")
                     .then((response) => response.json())
                     .then(async (lieu) => {
-                      setBackendData({motif, couleur, type, lieu});
+                      setBackendData({ motif, couleur, type, lieu });
                     })
                 })
             })
@@ -44,14 +44,8 @@ const IdentifierPage = () => {
   }, []);
 
   const sizes = [];
-
+useEffect(() => {
   const postData = () => {
-    console.log(JSON.stringify({
-      motif: motifPlume,
-      lieu: selectedLocation,
-      couleur: selectedColor,
-      typePlume: selectedFeatherType,
-    }));
     fetch(port + "search", {
       method: "POST",
       headers: {
@@ -67,10 +61,12 @@ const IdentifierPage = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setId_Oiseaux(data);
-      })
-  }
+        setOiseaux(data);
 
+      })
+    }
+    postData();
+}, [motifPlume, selectedLocation, selectedColor, selectedFeatherType]);
 
   return (
     <>
@@ -93,7 +89,7 @@ const IdentifierPage = () => {
               handleClick={() => setSelectedLocation(location.nom)}
               selected={selectedLocation === location.nom}
             />
-          )): null}
+          )) : null}
         </div>
 
         <Typography tag="h3"> Type de plume </Typography>
@@ -106,7 +102,7 @@ const IdentifierPage = () => {
               handleClick={() => setSelectedFeatherType(plume.types_de_plumes)}
               selected={selectedFeatherType === plume.types_de_plumes}
             />
-          )): null}
+          )) : null}
         </div>
 
         <Typography tag="h3"> Motif de Plume</Typography>
@@ -114,12 +110,12 @@ const IdentifierPage = () => {
           {backendData && backendData.motif ? backendData.motif.map((motif) => (
             <FeatherTypeCards
               key={motif.nom}
-              type={motif.nom === "barre terminale" || motif.nom === "liseré sur le vexille" ? motif.nom= "" : motif.nom}
+              type={motif.nom === "barre terminale" || motif.nom === "liseré sur le vexille" ? motif.nom = "" : motif.nom}
               folder="motifPlume"
               handleClick={() => setMotifPlume(motif.nom)}
               selected={motifPlume === motif.nom}
             />
-          )): null}
+          )) : null}
         </div>
 
         <Typography tag="h3"> Couleurs</Typography>
@@ -141,9 +137,7 @@ const IdentifierPage = () => {
             setSelectedColor(null);
           }}
           onClickSeeResults={() => {
-            postData();
-            navigate('/resultat', { state: { selectedLocation: selectedLocation, selectedFeatherType: selectedFeatherType, motifPlume: motifPlume, selectedColor: selectedColor } })
-            console.log(Id_Oiseaux);
+            console.log(oiseaux);
           }}
         />
       </div>

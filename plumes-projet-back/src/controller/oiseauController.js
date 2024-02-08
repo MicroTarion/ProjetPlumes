@@ -10,12 +10,10 @@ class oiseauController{
     listAll(req, res) { 
         const repo = new oiseauxRepo();
         repo.getAllOiseaux().then((result) => {
-            console.log(result);
             res.json(result);
         })
     }
     search(req, res) {
-        console.log(req.body);
         let couleur = req.body.couleur || null;
         let motif = req.body.motif || null;
         let lieu = req.body.lieu || null;
