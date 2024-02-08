@@ -66,8 +66,8 @@ const Header = () => {
               });
 
               const textStyles = {
-                transform: isActive ? "scale(1.05)" : "scale(1)",
-                marginTop: isActive ? "-4px" : "0",
+                transform: isActive ? "scale(1.5)" : "scale(1)",
+                marginTop: isActive ? "-2px" : "0",
               };
 
               return (
