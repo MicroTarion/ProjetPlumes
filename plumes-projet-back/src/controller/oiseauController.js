@@ -27,7 +27,7 @@ class oiseauController{
     }
     details(req, res){
         const repo = new oiseauxRepo();
-        repo.result(req.body.Id_Oiseaux).then((result) => {
+        repo.result(req.params.id).then((result) => {
             res.json(result);
         })
     }
