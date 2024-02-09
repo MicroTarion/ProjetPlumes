@@ -250,16 +250,16 @@ const IdentifierPage = () => {
       .then((data) => {
         setId_Oiseaux(data);
 
-        // Mettez à jour l'état searchFiltersApplied après l'application des filtres
+        // Mise à jour l'état searchFiltersApplied après click bouton 
         setSearchFiltersApplied(true);
       });
   };
 
   return (
     <div className="flex flex-col lg:flex-row">
-      {/* Mobile View */}
+      {/* vue mobile */}
       <div className="lg:hidden">
-        {/* Conditionally render SearchResults or SearchFilter based on searchFiltersApplied state */}
+        {/* Rendu conditionnel de SearchResults ou SearchFilter selon l'état searchFiltersApplied */}
         {searchFiltersApplied ? (
           <SearchResults data={Id_Oiseaux} />
         ) : (
@@ -277,7 +277,7 @@ const IdentifierPage = () => {
         )}
       </div>
 
-      {/* Tablet and Desktop Views */}
+      {/* Tablette et version bureau du rendu */}
       <div className="hidden lg:flex lg:flex-col lg:w-1/3">
         {/* Render SearchFilter only if searchFiltersApplied is false */}
         {!searchFiltersApplied && (
