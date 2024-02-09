@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 
 const OiseauEtPlumeCard = ({ oiseau, isFirst }) => {
 
+  const navigate = useNavigate();
+
   return (
-    <div className={`mb-${isFirst ? "12" : "8"} hover:scale-105 transition-transform duration-300`}>
+    <div className={`mb-${isFirst ? "12" : "8"} hover:scale-105 transition-transform duration-300`} onClick={() => navigate(`/detail`, { state: oiseau })}>
 
       <div className="flex">
         <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
@@ -34,7 +36,6 @@ const OiseauEtPlumeCard = ({ oiseau, isFirst }) => {
 const ResultatPage = () => {
 
   const location = useLocation();
-  const navigate = useNavigate();
 
   console.log(location.state.oiseaux[0]);
 

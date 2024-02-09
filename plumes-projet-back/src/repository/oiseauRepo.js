@@ -7,7 +7,7 @@ module.exports = class oiseauRepository {
         })
     }
     async result(Id_Oiseaux) {
-        return await con.promise().query("SELECT o.* , ord.nom AS NomOrdre, f.nom AS NomFamille, p.illustration AS img_plumes, lieu.nom as nomLocation FROM lieux_de_trouvaille lieu INNER JOIN trouver t ON lieu.Id_lieux_de_trouvaille = t.Id_lieux_de_trouvaille LEFT JOIN plumes on t.Id_Plumes = plumes.Id_Plumes LEFT JOIN posseder pos on pos.Id_Plumes = plumes.Id_Plumes INNER JOIN oiseaux o on o.Id_Oiseaux = pos.Id_Oiseaux INNER JOIN plumes p ON pos.Id_Plumes = p.Id_Plumes INNER JOIN famille f ON o.Id_Famille = f.Id_Famille INNER JOIN ordre ord ON o.Id_Ordre = ord.Id_Ordre WHERE o.Id_Oiseaux = ?",[Id_Oiseaux]).then((result) => {
+        return await con.promise().query("SELECT o.* , ord.nom AS NomOrdre, f.nom AS NomFamille, p.illustration AS img_plumes, lieu.nom as nomLocation, lieu.logoFileName as imagepath FROM lieux_de_trouvaille lieu INNER JOIN trouver t ON lieu.Id_lieux_de_trouvaille = t.Id_lieux_de_trouvaille LEFT JOIN plumes on t.Id_Plumes = plumes.Id_Plumes LEFT JOIN posseder pos on pos.Id_Plumes = plumes.Id_Plumes INNER JOIN oiseaux o on o.Id_Oiseaux = pos.Id_Oiseaux INNER JOIN plumes p ON pos.Id_Plumes = p.Id_Plumes INNER JOIN famille f ON o.Id_Famille = f.Id_Famille INNER JOIN ordre ord ON o.Id_Ordre = ord.Id_Ordre WHERE o.Id_Oiseaux = ?",[Id_Oiseaux]).then((result) => {
             return (result[0].length != 0 ? result[0] : null);
         })
     }
