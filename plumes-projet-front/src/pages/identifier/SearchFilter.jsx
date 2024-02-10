@@ -1,5 +1,3 @@
-// SearchFilter.js
-import TitleBarre from "../../components/common/TitleBarre";
 import FindingLocationCards from "../../components/cards/FindingLocationCards";
 import Typography from "../../components/common/Typography";
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
@@ -17,7 +15,6 @@ const SearchFilter = ({
   selectedColor,
   setSelectedColor,
   postData,
-  searchFiltersApplied,
 }) => {
   const locationData = [
     { title: "Campagne", logoFileName: "icon-countryside.svg" },
@@ -88,7 +85,7 @@ const SearchFilter = ({
 
   return (
     <>
-    {/* Filtre pour choix du lieu */}
+      {/* Filtre pour choix du lieu */}
       <div className="searchFilter p-4 ">
         <Typography tag="h3"> Lieu de trouvaille </Typography>
         <div className="overflow-x-auto">
@@ -104,7 +101,7 @@ const SearchFilter = ({
             ))}
           </div>
         </div>
-        
+
 
         {/* Filtre pour choix du type de plume */}
         <Typography tag="h3" className="mt-10"> Type de plume </Typography>
@@ -165,7 +162,7 @@ const SearchFilter = ({
       </div>
 
     </>
-      
+
     // </div>
   );
 };

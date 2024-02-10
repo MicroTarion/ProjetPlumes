@@ -27,7 +27,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="hidden md:flex justify-between items-center bg-noir-corbeau p-4">
+      <header className="hidden md:flex justify-between items-center bg-noir-corbeau p-4 h-[11vh]">
         <nav className="mx-auto">
           <ul className="flex gap-10">
             {paths.map((element) => (
@@ -61,13 +61,13 @@ const Header = () => {
               let isActive = location.pathname === element.path;
 
               const classes = clsx({
-                "transition-all z-10 absolute bg-white flex justify-center items-center h-12 w-16 top-0 border-4 border-ui-noir-corbeau overflow-hidden": true,
+                "transition-all z-10 absolute bg-ui-blanc-plume flex justify-center items-center h-12 w-16 top-0 border-4 border-ui-noir-corbeau overflow-hidden": true,
                 "-top-8 ": isActive,
               });
 
               const textStyles = {
                 transform: isActive ? "scale(1.5)" : "scale(1)",
-                marginTop: isActive ? "-2px" : "0",
+                marginTop: isActive ? "-4px" : "0",
               };
 
               return (
@@ -79,7 +79,7 @@ const Header = () => {
                           className={classes}
                           style={{
                             borderRadius: "40px",
-                            transform: isActive ? "scale(1.2)" : "scale(1)",
+                            transform: isActive ? "scale(1.5)" : "scale(1)",
                             marginTop: isActive ? "-4px" : "0",
                           }}
                         >

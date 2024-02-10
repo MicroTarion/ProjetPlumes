@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import { useState } from 'react';
 const CursorSize = () => {
   const minValue = 10;
   const maxValue = 170;
@@ -28,8 +27,8 @@ const CursorSize = () => {
         }}
       />
 
-      <div className="relative z-10 ml-4">
-        Taille sélectionnée: {cursorPosition} cm
+      <div className="relative z-10 ml-4 text-ui-vert-naturaliste font-poppins text-xs">
+        Taille sélectionnée : {cursorPosition} cm
       </div>
     </div>
   );

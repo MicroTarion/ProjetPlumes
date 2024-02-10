@@ -57,6 +57,10 @@ const TitleBarre = () => {
     if (currentPath === "/resultat") {
       navigate("/identifier");
     }
+    //si pas trouver de condition pour changer de page
+    if (currentPath === "/resultat-especes") {
+      navigate("/especes");
+    }
   };
 
   return (
@@ -66,8 +70,8 @@ const TitleBarre = () => {
       </Typography>
     </div>
   );
-  
-  
+
+
 }
 
 export default TitleBarre;

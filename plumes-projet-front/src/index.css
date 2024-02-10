@@ -30,3 +30,23 @@ svg path {
   src: url('./assets/fonts/F37 Attila/F37Attila-Bold.ttf') format('truetype');
 }
 
+/* styles.css */
+/* Pour Webkit (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 21px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2D4941; /* Couleur du curseur (thumb) */
+  border-radius: 11px; /* Coins arrondis */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #B6DCFA; /* Couleur de la piste (track) */
+}
+
+/* Pour Firefox */
+* {
+  scrollbar-color: #B6DCFA #2D4941; /* Couleurs du curseur et de la piste */
+  scrollbar-width: thin; /* Largeur du curseur */
+}

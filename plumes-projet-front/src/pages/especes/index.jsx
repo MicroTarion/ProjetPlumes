@@ -11,8 +11,11 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
     <div className={`mb-${isFirst ? "12" : "8"} hover:scale-105 transition-transform duration-300`}>
       {selectedLetter !== "" && isFirst ? (
         <div className="absolute left-0 top-0 ml-8 font-bold text-lg" style={{ marginTop: '-6px' }}>
-          <u className={`text-ui-bleu-ciel font-bold text-lg`}>
+          {/* modif font sora a la place de fr37 Attila */}
+          <u className={`text-ui-bleu-ciel font-bold font-sora text-lg`}>
             {selectedLetter}
+            {/* ajout d'un div pour la ligne bleue */}
+            {/* <div className="absolute w-full h-1 bg-ui-bleu-ciel bottom-0 left-0"></div> */}
           </u>
         </div>
       ) : null}
@@ -72,27 +75,28 @@ const EspecesPage = () => {
     setSearchTerm("");
   };
 
-  const isLetterDisplayed = backendData? backendData.filter((oiseaux) => {
-    return oiseaux.NomOiseau.includes(selectedLetter)}): false;
+  const isLetterDisplayed = backendData ? backendData.filter((oiseaux) => {
+    return oiseaux.NomOiseau.includes(selectedLetter)
+  }) : false;
 
-    const getFilteredData = () => {
+  const getFilteredData = () => {
 
-      if(!backendData) return [];
-  
-      if (selectedLetter) {
-        return backendData.filter(
-          (oiseaux) => ( oiseaux.NomOiseau[0].toUpperCase() === selectedLetter))
-  
-      } else if (searchTerm) {
-        return backendData.filter(
-          (oiseaux) => oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      } else {
-        return backendData
-      }
+    if (!backendData) return [];
+
+    if (selectedLetter) {
+      return backendData.filter(
+        (oiseaux) => (oiseaux.NomOiseau[0].toUpperCase() === selectedLetter))
+
+    } else if (searchTerm) {
+      return backendData.filter(
+        (oiseaux) => oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    } else {
+      return backendData
     }
-  
-    const filteredData = getFilteredData();
+  }
+
+  const filteredData = getFilteredData();
 
   return (
     <div>
@@ -102,7 +106,7 @@ const EspecesPage = () => {
       </div> */}
 
       <TitleBarre />
-      
+
       {/* Moteur de recherche au-dessus de la lettre (fond blanc avec bordure verte) */}
       <div
         className="bg-blanc-tourterelle border-b px-10 pb-4 flex items-center"
@@ -126,7 +130,7 @@ const EspecesPage = () => {
 
       {/* Conteneur principal (flex avec background vert naturaliste) */}
       <div className="flex bg-vert-naturaliste text-blanc-plume relative">
-        
+
         {/* Affichage de l'abécédaire à droite */}
         <Abecedaire
           alphabet={alphabet}
@@ -138,13 +142,13 @@ const EspecesPage = () => {
         <div className="grid grid-cols-3 gap-0 mx-auto mt-4">
           {filteredData
             ? filteredData.map((oiseau, index) => (
-                <OiseauEtPlumeCard
-                  key={oiseau.NomOiseau}
-                  oiseau={oiseau}
-                  selectedLetter={selectedLetter}
-                  isFirst={index === 0}
-                />
-              ))
+              <OiseauEtPlumeCard
+                key={oiseau.NomOiseau}
+                oiseau={oiseau}
+                selectedLetter={selectedLetter}
+                isFirst={index === 0}
+              />
+            ))
             : null}
         </div>
       </div>
