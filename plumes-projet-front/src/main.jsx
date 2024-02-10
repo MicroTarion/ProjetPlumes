@@ -6,7 +6,8 @@ import HomePage from  "./pages/home/index.jsx";
 import LexiquePage from  "./pages/lexique/index.jsx";
 import IdentifierPage from  "./pages/identifier";
 import EspecesPage from  "./pages/especes/index.jsx";
-import BirdResult from  "./pages/resultat/index.jsx";
+import DetailPage from  "./pages/resultat/detail.jsx";
+import ResultatPage from './pages/resultat/index.jsx';
 
 
 import './index.css'
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
         { path: "/lexique", element: <LexiquePage /> },
         { path: "/identifier", element: <IdentifierPage/> },
         { path: "/especes", element: <EspecesPage/> },
-        { path: "/resultat", element: <BirdResult/> },
+        { path: "/detail", element: <DetailPage/> },
+        { path: "/resultat", element: <ResultatPage/> },
       ],
     },
   ]);

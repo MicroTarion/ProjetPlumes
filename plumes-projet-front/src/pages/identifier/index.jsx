@@ -204,7 +204,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchFilter from "./SearchFilter";
-import SearchResults from "./SearchResults";
+import TitleBarre from "../../components/common/TitleBarre";
+import ResultatPage from "../resultat/index.jsx";
+import OiseauEtPlumeCard from "../resultat/OiseauEtPlumeCard.jsx";
 
 const port = "http://localhost:5000/";
 
@@ -217,9 +219,6 @@ const IdentifierPage = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedFeatherType, setSelectedFeatherType] = useState(null);
   const [motifPlume, setMotifPlume] = useState(null);
-
-  // Déclaration de l'état searchFiltersApplied
-  const [searchFiltersApplied, setSearchFiltersApplied] = useState(false);
 
   useEffect(() => {
     const getData = () => {
@@ -250,19 +249,15 @@ const IdentifierPage = () => {
       .then((data) => {
         setId_Oiseaux(data);
 
-        // Mise à jour l'état searchFiltersApplied après click bouton 
-        setSearchFiltersApplied(true);
       });
   };
 
   return (
-    <div className="flex flex-col lg:flex-row">
-      {/* vue mobile */}
-      <div className="lg:hidden">
-        {/* Rendu conditionnel de SearchResults ou SearchFilter selon l'état searchFiltersApplied */}
-        {searchFiltersApplied ? (
-          <SearchResults data={Id_Oiseaux} />
-        ) : (
+    <>
+      <TitleBarre reverse={true} />
+      <div className="flex flex-col lg:flex-row">
+        {/* Composant SearchFilter - Aligné à gauche et occupe un tiers de l'écran sur desktop */}
+        <div className="lg:w-1/3">
           <SearchFilter
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
@@ -274,31 +269,18 @@ const IdentifierPage = () => {
             setSelectedColor={setSelectedColor}
             postData={postData}
           />
-        )}
+        </div>
+  
+        {/* Composant OiseauEtPlumeCard - S'affiche sur les deux tiers restants sur desktop */}
+        <div className="w-2/3">
+          <OiseauEtPlumeCard>
+            {/* Contenu de OiseauEtPlumeCard */}
+          </OiseauEtPlumeCard>
+        </div>
       </div>
-
-      {/* Tablette et version bureau du rendu */}
-      <div className="hidden lg:flex lg:flex-col lg:w-1/3">
-        {/* Render SearchFilter only if searchFiltersApplied is false */}
-        {!searchFiltersApplied && (
-          <SearchFilter
-            selectedLocation={selectedLocation}
-            setSelectedLocation={setSelectedLocation}
-            selectedFeatherType={selectedFeatherType}
-            setSelectedFeatherType={setSelectedFeatherType}
-            motifPlume={motifPlume}
-            setMotifPlume={setMotifPlume}
-            selectedColor={selectedColor}
-            setSelectedColor={setSelectedColor}
-            postData={postData}
-          />
-        )}
-      </div>
-      <div className="lg:flex lg:w-2/3 lg:overflow-y-auto">
-        <SearchResults data={Id_Oiseaux} />
-      </div>
-    </div>
+    </>
   );
+  
 };
 
 export default IdentifierPage;

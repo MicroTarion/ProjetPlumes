@@ -87,10 +87,8 @@ const SearchFilter = ({
   const sizes = [];
 
   return (
-    // <div className="searchFilter">
     <>
     {/* Filtre pour choix du lieu */}
-    <TitleBarre reverse={true} />
       <div className="searchFilter p-4 ">
         <Typography tag="h3"> Lieu de trouvaille </Typography>
         <div className="overflow-x-auto">
@@ -163,18 +161,7 @@ const SearchFilter = ({
           }}
           onClickSeeResults={postData}
         />
-        {/* Condition pour afficher le composant ou page voir les résultats */}
-        {searchFiltersApplied ? (
-          <ContainerButton
-            onClickDelete={() => {
-              setSelectedFeatherType(null);
-              setSelectedLocation(null);
-              setMotifPlume(null);
-              setSelectedColor(null);
-            }}
-            onClickSeeResults={postData}
-          />
-        ) : null}
+
       </div>
 
     </>

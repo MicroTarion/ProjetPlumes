@@ -1,9 +1,10 @@
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 import Typography from "../common/Typography";
 
 const TitleBarre = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const navigate = useNavigate();
 
   let variant = "noir-corbeau";
   let text = "Lexique de la plume";
@@ -28,21 +29,45 @@ const TitleBarre = () => {
       <div className="flex items-center">
         <img
           src="logo/vector.svg"
-          alt="logo pour retour aux résultats"
+          alt="logo pour retour aux filtre de recherches"
           className="m-6 color-ui-vert-naturaliste"
         />
         <span>Retour à l'identification</span>
       </div>
     );
   }
+  else if (currentPath === "/detail") {
+    variant = "vert-naturaliste";
+    text = (
+      <div className="flex items-center">
+        <img
+          src="logo/vector.svg"
+          alt="logo pour retour aux résultats"
+          className="m-6 color-ui-vert-naturaliste"
+        />
+        <span>Retour aux résultats</span>
+      </div>
+    );
+  }
+
+  const onClickHandler = () => {
+    if (currentPath === "/detail") {
+      navigate("/resultat");
+    }
+    if (currentPath === "/resultat") {
+      navigate("/identifier");
+    }
+  };
 
   return (
-    <div className={`w-full h-[10vh] flex flex-row items-center ${bgColorClass} w-screen p-10`}>
+    <div className={`w-full h-[10vh] flex flex-row items-center ${bgColorClass} w-screen p-10`} onClick={onClickHandler}>
       <Typography Tag="h3" variant={variant} reverse={reverse} customClasses="font-poppins text-lg">
         {text}
       </Typography>
     </div>
   );
+  
+  
 }
 
 export default TitleBarre;
