@@ -43,7 +43,7 @@ const ResultatPage = () => {
     <>
       <div>
         <TitleBarre />
-        <div className="flex bg-vert-naturaliste text-blanc-plume relative">
+        <div className="flex bg-vert-naturaliste text-blanc-plume relative min-h-[1025px]">
           <div className="grid grid-cols-2 gap-0 mx-auto mt-4">
             {location && location.state.oiseaux
               ? location.state.oiseaux[0].map((oiseau, index) => (
