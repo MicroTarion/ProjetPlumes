@@ -35,7 +35,7 @@ module.exports = (app) => {
   app.post("/search", (req, res) => {
     oiseauController.search(req, res)
   })
-  app.get("/result/:id([0-9])", (req, res) => {
+  app.get("/result/:id([0-9]+)", (req, res) => {
     oiseauController.details(req, res)
   })
 

@@ -68,6 +68,8 @@ useEffect(() => {
     postData();
 }, [motifPlume, selectedLocation, selectedColor, selectedFeatherType]);
 
+console.log(backendData ? backendData.lieu: null);
+
   return (
     <>
       <div>
@@ -80,9 +82,9 @@ useEffect(() => {
 
         <Typography tag="h3"> Lieu de trouvaille </Typography>
         <div className="flex flex-row items-center justify-center">
-          {backendData && backendData.lieu ? backendData.lieu.map((location) => (
+          {backendData && backendData.lieu ? backendData.lieu.map((location, id) => (
             <FindingLocationCards
-              key={location.nom}
+              key={id}
               title={location.nom}
               logoFileName={location.logoFileName}
               handleClick={() => setSelectedLocation(location.nom)}
@@ -93,9 +95,9 @@ useEffect(() => {
 
         <Typography tag="h3"> Type de plume </Typography>
         <div className="flex flex-row items-center justify-center">
-          {backendData && backendData ? backendData.type.map((plume) => (
+          {backendData && backendData ? backendData.type.map((plume, id) => (
             <FeatherTypeCards
-              key={plume.types_de_plumes}
+              key={id}
               type={plume.types_de_plumes}
               folder="typePlume"
               handleClick={() => setSelectedFeatherType(plume.types_de_plumes)}
@@ -106,9 +108,9 @@ useEffect(() => {
 
         <Typography tag="h3"> Motif de Plume</Typography>
         <div className="flex flex-row items-center justify-center">
-          {backendData && backendData.motif ? backendData.motif.map((motif) => (
+          {backendData && backendData.motif ? backendData.motif.map((motif, id) => (
             <FeatherTypeCards
-              key={motif.nom}
+              key={id}
               type={motif.nom === "barre terminale" || motif.nom === "liseré sur le vexille" ? motif.nom = "" : motif.nom}
               folder="motifPlume"
               handleClick={() => setMotifPlume(motif.nom)}
