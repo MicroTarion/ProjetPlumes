@@ -80,7 +80,7 @@ const Header = () => {
                           style={{
                             borderRadius: "40px",
                             transform: isActive ? "scale(1.5)" : "scale(1)",
-                            marginTop: isActive ? "-4px" : "0",
+                            marginTop: isActive ? "-22px" : "0",
                           }}
                         >
                           <img

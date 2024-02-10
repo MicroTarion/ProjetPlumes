@@ -11,105 +11,105 @@ const IdentifierPage = () => {
 
 
   //>>>>>>>>>> à commenter jusqu'à ligne 51
-  const [backendData, setBackendData] = useState(null);
-  const [Id_Oiseaux, setId_Oiseaux] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedFeatherType, setSelectedFeatherType] = useState(null);
-  const [motifPlume, setMotifPlume] = useState(null);
-
-  useEffect(() => {
-    const getData = () => {
-      fetch(port + "list")
-        .then((response) => response.json())
-        .then((data) => {
-          setBackendData(data);
-        });
-    };
-
-    getData();
-  }, []);
-
-  const postData = () => {
-    fetch(port + "search", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        motif: motifPlume,
-        lieu: selectedLocation,
-        couleur: selectedColor,
-        typePlume: selectedFeatherType,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setId_Oiseaux(data);
-
-      });
-  };
-  // >>>>>>>>>>>>> Fin de la ligne 51 à commenter
-
-
-
-
-  ////////////////////// à décommenter
   // const [backendData, setBackendData] = useState(null);
-  // const [oiseaux, setOiseaux] = useState([]);
-  // const [motifPlume, setMotifPlume] = useState(null);
+  // const [Id_Oiseaux, setId_Oiseaux] = useState([]);
   // const [selectedLocation, setSelectedLocation] = useState(null);
   // const [selectedColor, setSelectedColor] = useState(null);
   // const [selectedFeatherType, setSelectedFeatherType] = useState(null);
+  // const [motifPlume, setMotifPlume] = useState(null);
 
   // useEffect(() => {
-  //   const getData = async () => {
-  //     await fetch(port + "motifs")
+  //   const getData = () => {
+  //     fetch(port + "list")
   //       .then((response) => response.json())
-  //       .then(async (motif) => {
-  //         await fetch(port + "couleurs")
-  //           .then((response) => response.json())
-  //           .then(async (couleur) => {
-  //             await fetch(port + "types")
-  //               .then((response) => response.json())
-  //               .then(async (type) => {
-  //                 await fetch(port + "lieux")
-  //                   .then((response) => response.json())
-  //                   .then(async (lieu) => {
-  //                     setBackendData({ motif, couleur, type, lieu });
-  //                   })
-  //               })
-  //           })
+  //       .then((data) => {
+  //         setBackendData(data);
   //       });
   //   };
 
   //   getData();
   // }, []);
 
-  // const sizes = [];
-  // useEffect(() => {
-  //   const postData = () => {
-  //     fetch(port + "search", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         motif: motifPlume,
-  //         lieu: selectedLocation,
-  //         couleur: selectedColor,
-  //         typePlume: selectedFeatherType,
-  //       }),
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //         setOiseaux(data);
+  // const postData = () => {
+  //   fetch(port + "search", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       motif: motifPlume,
+  //       lieu: selectedLocation,
+  //       couleur: selectedColor,
+  //       typePlume: selectedFeatherType,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setId_Oiseaux(data);
 
-  //       })
-  //   }
-  //   postData();
-  // }, [motifPlume, selectedLocation, selectedColor, selectedFeatherType]);
+  //     });
+  // };
+  // >>>>>>>>>>>>> Fin de la ligne 51 à commenter
+
+
+
+
+  ////////////////////// à décommenter
+  const [backendData, setBackendData] = useState(null);
+  const [oiseaux, setOiseaux] = useState([]);
+  const [motifPlume, setMotifPlume] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedFeatherType, setSelectedFeatherType] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      await fetch(port + "motifs")
+        .then((response) => response.json())
+        .then(async (motif) => {
+          await fetch(port + "couleurs")
+            .then((response) => response.json())
+            .then(async (couleur) => {
+              await fetch(port + "types")
+                .then((response) => response.json())
+                .then(async (type) => {
+                  await fetch(port + "lieux")
+                    .then((response) => response.json())
+                    .then(async (lieu) => {
+                      setBackendData({ motif, couleur, type, lieu });
+                    })
+                })
+            })
+        });
+    };
+
+    getData();
+  }, []);
+
+  const sizes = [];
+  useEffect(() => {
+    const postData = () => {
+      fetch(port + "search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          motif: motifPlume,
+          lieu: selectedLocation,
+          couleur: selectedColor,
+          typePlume: selectedFeatherType,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setOiseaux(data);
+
+        })
+    }
+    postData();
+  }, [motifPlume, selectedLocation, selectedColor, selectedFeatherType]);
 
 
 
@@ -121,7 +121,7 @@ const IdentifierPage = () => {
        
        {/* ///////////////////à commenter jusqu'à la ligne 136*/}
        
-        <div className="lg:w-1/3">
+        {/* <div className="lg:w-1/3">
           <SearchFilter
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
@@ -133,11 +133,11 @@ const IdentifierPage = () => {
             setSelectedColor={setSelectedColor}
             postData={postData}
           />
-        </div>
+        </div> */}
 
 {/* ////////////////// à décommenter jusqu'à la ligne 153 */}
 
-        {/* <div className="lg:w-1/3">
+        <div className="lg:w-1/3">
           <SearchFilter
             backendData={backendData}
             oiseaux={oiseaux}
@@ -150,7 +150,7 @@ const IdentifierPage = () => {
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}
           />
-        </div> */}
+        </div>
   {/* ///////////////// fin décommentation */}
 
         {/* Composant OiseauEtPlumeCard - S'affiche sur les deux tiers restants sur desktop */}
