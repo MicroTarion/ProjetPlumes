@@ -1,16 +1,12 @@
-import FindingLocationCards from "../../components/cards/FindingLocationCards";
-import Typography from "../../components/common/Typography";
-import ContainerButton from "./ContainerButton";
-import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import CursorSize from "../../components/cards/CursorSize";
-import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
+import { useNavigate } from "react-router-dom";
+import SearchFilter from "./SearchFilter";
+import TitleBarre from "../../components/common/TitleBarre";
+import ResultatPage from "../resultat/index.jsx";
 
 const port = "http://localhost:5000/";
-const IdentifierPage = () => {
 
-  const navigate = useNavigate();
+const IdentifierPage = () => {
 
   const [backendData, setBackendData] = useState(null);
   const [oiseaux, setOiseaux] = useState([]);
@@ -71,80 +67,32 @@ console.log(backendData ? backendData.lieu: null);
 
   return (
     <>
-      <div className="min-h-[1025px]">
-        <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
+      <TitleBarre />
+      <div className="flex flex-col lg:flex-row">
 
-          <Typography tag="h2" variant="blanc-plume">
-            Identifier ma plume
-          </Typography>
+
+        <div className="lg:w-1/3">
+          <SearchFilter
+            backendData={backendData}
+            oiseaux={oiseaux}
+            motifPlume={motifPlume}
+            setMotifPlume={setMotifPlume}
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
+            selectedFeatherType={selectedFeatherType}
+            setSelectedFeatherType={setSelectedFeatherType}
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+          />
         </div>
 
-        <Typography tag="h3"> Lieu de trouvaille </Typography>
-        <div className="flex flex-row items-center justify-center">
-          {backendData && backendData.lieu ? backendData.lieu.map((location, id) => (
-            <FindingLocationCards
-              key={id}
-              title={location.nom}
-              logoFileName={location.logoFileName}
-              handleClick={() => setSelectedLocation(location.nom)}
-              selected={selectedLocation === location.nom}
-            />
-          )) : null}
+        <div className="lg:w-2/3  max-lg:hidden">
+          <ResultatPage showTitleBarre={false} />
         </div>
-
-        <Typography tag="h3"> Type de plume </Typography>
-        <div className="flex flex-row items-center justify-center">
-          {backendData && backendData ? backendData.type.map((plume, id) => (
-            <FeatherTypeCards
-              key={id}
-              type={plume.types_de_plumes}
-              folder="typePlume"
-              handleClick={() => setSelectedFeatherType(plume.types_de_plumes)}
-              selected={selectedFeatherType === plume.types_de_plumes}
-            />
-          )) : null}
-        </div>
-
-        <Typography tag="h3"> Motif de Plume</Typography>
-        <div className="flex flex-row items-center justify-center">
-          {backendData && backendData.motif ? backendData.motif.map((motif, id) => (
-            <FeatherTypeCards
-              key={id}
-              type={motif.nom === "barre terminale" || motif.nom === "liseré sur le vexille" ? motif.nom = "" : motif.nom}
-              folder="motifPlume"
-              handleClick={() => setMotifPlume(motif.nom)}
-              selected={motifPlume === motif.nom}
-            />
-          )) : null}
-        </div>
-
-        <Typography tag="h3"> Couleurs</Typography>
-
-        <PaletCardSingleColor
-          selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
-        />
-
-        <Typography tag="h3"> Tailles</Typography>
-        <CursorSize />
-
-        <ContainerButton
-          onClickDelete={() => {
-            console.log("detele")
-            setSelectedFeatherType(null);
-            setSelectedLocation(null);
-            setMotifPlume(null);
-            setSelectedColor(null);
-          }}
-          onClickSeeResults={() => {
-            console.log(oiseaux);
-
-            navigate('/resultat', { state: { selectedLocation: selectedLocation, selectedFeatherType: selectedFeatherType, motifPlume: motifPlume, selectedColor: selectedColor, oiseaux: oiseaux } })
-          }}
-        />
       </div>
     </>
   );
+
 };
 
 export default IdentifierPage;

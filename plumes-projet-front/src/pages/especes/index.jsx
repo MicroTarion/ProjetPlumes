@@ -34,27 +34,28 @@ const EspecesPage = () => {
     setSearchTerm("");
   };
 
-  const isLetterDisplayed = backendData? backendData.filter((oiseaux) => {
-    return oiseaux.NomOiseau.includes(selectedLetter)}): false;
+  const isLetterDisplayed = backendData ? backendData.filter((oiseaux) => {
+    return oiseaux.NomOiseau.includes(selectedLetter)
+  }) : false;
 
-    const getFilteredData = () => {
+  const getFilteredData = () => {
 
-      if(!backendData) return [];
-  
-      if (selectedLetter) {
-        return backendData.filter(
-          (oiseaux) => ( oiseaux.NomOiseau[0].toUpperCase() === selectedLetter))
-  
-      } else if (searchTerm) {
-        return backendData.filter(
-          (oiseaux) => oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      } else {
-        return backendData
-      }
+    if (!backendData) return [];
+
+    if (selectedLetter) {
+      return backendData.filter(
+        (oiseaux) => (oiseaux.NomOiseau[0].toUpperCase() === selectedLetter))
+
+    } else if (searchTerm) {
+      return backendData.filter(
+        (oiseaux) => oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    } else {
+      return backendData
     }
-  
-    const filteredData = getFilteredData();
+  }
+
+  const filteredData = getFilteredData();
 
   return (
     <div>
@@ -64,7 +65,7 @@ const EspecesPage = () => {
       </div> */}
 
       <TitleBarre />
-      
+
       {/* Moteur de recherche au-dessus de la lettre (fond blanc avec bordure verte) */}
       <div
         className="bg-blanc-tourterelle border-b px-10 pb-4 flex items-center"
@@ -87,8 +88,8 @@ const EspecesPage = () => {
       </div>
 
       {/* Conteneur principal (flex avec background vert naturaliste) */}
-      <div className="flex bg-vert-naturaliste text-blanc-plume relative min-h-[900px]">
-        
+      <div className="flex bg-vert-naturaliste text-blanc-plume relative">
+
         {/* Affichage de l'abécédaire à droite */}
         <Abecedaire
           alphabet={alphabet}

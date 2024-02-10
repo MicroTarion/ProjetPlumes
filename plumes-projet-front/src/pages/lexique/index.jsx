@@ -23,7 +23,7 @@ const LexiquePage = () => {
 
             {/* Nouvelle section */}
             <div style={{ backgroundColor: '#87CEEB', padding: '20px' }}>
-                
+
 
                 {/* Image Lexique centrée */}
                 <img
@@ -36,11 +36,11 @@ const LexiquePage = () => {
                         margin: '0 auto', // Centrer l'image horizontalement
                     }}
                 />
-                
+
                 <p
                     style={{
                         color: 'var(--Vert-naturaliste, #2D4941)',
-                        fontFamily: 'F37 Attila',
+                        fontFamily: 'sora',
                         fontSize: '30px',
                         fontStyle: 'normal',
                         fontWeight: '500',
@@ -57,7 +57,7 @@ const LexiquePage = () => {
                     {Array.from({ length: 9 }, (_, index) => (
                         <div key={index} style={{ border: '1px solid #008c8c', padding: '10px', borderRadius: '5px' }}>
                             <strong>{index + 1}. {titresColonnes[index]}</strong>
-                           
+
                         </div>
                     ))}
                 </div>
@@ -66,7 +66,7 @@ const LexiquePage = () => {
                 <p
                     style={{
                         color: 'var(--Vert-naturaliste, #2D4941)',
-                        fontFamily: 'F37 Attila',
+                        fontFamily: 'sora',
                         fontSize: '26px',
                         fontStyle: 'normal',
                         fontWeight: '500',

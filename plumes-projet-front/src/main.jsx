@@ -22,6 +22,7 @@ const router = createBrowserRouter([
         { path: "/especes", element: <EspecesPage/> },
         { path: "/detail", element: <DetailPage/> },
         { path: "/resultat", element: <ResultatPage/> },
+        {path: "/resultat-especes", element: <ResultatPage/>}
       ],
     },
   ]);

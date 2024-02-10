@@ -1,4 +1,3 @@
-import { useState } from "react";
 import clsx from "clsx";
 
 const PaletButton = ({ color, selectedColor, setSelectedColor }) => {
@@ -29,13 +28,9 @@ const PaletCardSingleColor = ({ selectedColor, setSelectedColor }) => {
     "noir",
   ];
 
-  const defaultStyle =
-    "w-10 h-10 flex-shrink-0 rounded-full mr-2 border-4 border-solid border-ui-vert-naturaliste";
-  const selectedStyle = "border-8 border-solid border-ui-vert-naturaliste";
-
   return (
     <>
-      <div className="flex flex-row">
+      <div className="flex flex-row mt-3 ml-3 mb-10">
         {colors.map((color, index) => {
           return (
             <PaletButton
