@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import Abecedaire from "../../components/common/Abecedaire"; // Import du composant Abecedaire
+
+import Abecedaire from "../../components/common/Abecedaire";
+import TitleBarre from "../../components/common/TitleBarre";
+
 
 const port = "http://localhost:5000/"; // Port pour l'API backend
 
@@ -100,25 +103,27 @@ const EspecesPage = () => {
 
   return (
     <div>
-      {/* Texte au-dessus de la barre de recherche */}
+      {/* Texte au-dessus de la barre de recherche
       <div className="bg-blanc-plume text-noir-corbeau p-2 text-lg font-bold font-poppins">
         Toutes les espèces d&apos;oiseaux:
-      </div>
+      </div> */}
 
+      <TitleBarre />
+      
       {/* Moteur de recherche au-dessus de la lettre (fond blanc avec bordure verte) */}
       <div
-        className="bg-blanc-plume border-b p-2 flex items-center"
+        className="bg-blanc-tourterelle border-b px-10 pb-4 flex items-center"
         style={{ borderColor: "#008c8c" }}
       >
         <input
           type="text"
-          placeholder="Rechercher..."
+          placeholder="  Rechercher..."
           value={searchTerm}
           onChange={(e) => {
             setSelectedLetter("");
             setSearchTerm(e.target.value);
           }}
-          className="w-40 p-2 outline-none border-none bg-blanc-plume border-green-naturaliste"
+          className="w-40 p-2 outline-none bg-blanc-plume border border-ui-vert-naturaliste rounded-full"
         />
         <FontAwesomeIcon
           icon={faSearch}

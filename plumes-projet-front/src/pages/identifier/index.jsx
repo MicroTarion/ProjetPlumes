@@ -2,94 +2,77 @@ import FindingLocationCards from "../../components/cards/FindingLocationCards";
 import Typography from "../../components/common/Typography";
 import ContainerButton from "./ContainerButton";
 import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import CursorSize from "../../components/cards/CursorSize";
-import { useState } from "react";
 import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
 
-
+const port = "http://localhost:5000/";
 const IdentifierPage = () => {
-  const locationData = [
-    { title: "Campagne", logoFileName: "icon-countryside.svg" },
-    { title: "Ville", logoFileName: "icon-ville.svg" },
-    { title: "Forêt", logoFileName: "icon-forest.svg" },
-    { title: "Eau", logoFileName: "icon-aquatic.svg" },
-    { title: "Montagne", logoFileName: "icon-moutain.svg" },
-  ];
 
+  const navigate = useNavigate();
+
+  const [backendData, setBackendData] = useState(null);
+  const [oiseaux, setOiseaux] = useState([]);
   const [motifPlume, setMotifPlume] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  // const [selectedFeatherType, setSelectedFeatherType] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedFeatherType, setSelectedFeatherType] = useState(null);
 
-  const plumeData = [
-    {
-      Id_Plumes: 1,
-      illustration: "plumes-canard-colvert",
-      "types de plumes": "Grande CS",
-    },
-    {
-      Id_Plumes: 2,
-      illustration: "plumes-cygne-tubercule",
-      "types de plumes": "Rectrice C",
-    },
-    {
-      Id_Plumes: 3,
-      illustration: "plumes-poule-d_eau",
-      "types de plumes": "Rectrice E",
-    },
-    {
-      Id_Plumes: 4,
-      illustration: "plumes-oie-cendree",
-      "types de plumes": "Rémige primaire E",
-    },
-    {
-      Id_Plumes: 5,
-      illustration: "plumes-pigeon-ramier",
-      "types de plumes": "Rémige secondaire I",
-    },
-    {
-      Id_Plumes: 6,
-      illustration: "plumes-chouette-hulotte",
-      "types de plumes": "Rémige secondaire E",
-    },
-    {
-      Id_Plumes: 7,
-      illustration: "plumes-hibou-petit-duc",
-      "types de plumes": "Rémige secondaire I",
-    },
-    {
-      Id_Plumes: 8,
-      illustration: "plumes-tourterelle-des-bois",
-      "types de plumes": "Sous caudale",
-    },
-    {
-      Id_Plumes: 9,
-      illustration: "plumes-tourterelle-turque",
-      "types de plumes": "Sus caudale",
-    },
-    {
-      Id_Plumes: 10,
-      illustration: "plumes-buse-variable",
-      "types de plumes": "Grande CP",
-    },
-  ];
+  useEffect(() => {
+    const getData = async () => {
+      await fetch(port + "motifs")
+        .then((response) => response.json())
+        .then(async (motif) => {
+          await fetch(port + "couleurs")
+            .then((response) => response.json())
+            .then(async (couleur) => {
+              await fetch(port + "types")
+                .then((response) => response.json())
+                .then(async (type) => {
+                  await fetch(port + "lieux")
+                    .then((response) => response.json())
+                    .then(async (lieu) => {
+                      setBackendData({ motif, couleur, type, lieu });
+                    })
+                })
+            })
+        });
+    };
 
-  const motifData = [
-    { name: "bicolore" },
-    { name: "bordure-vexille" },
-    { name: "encoches" },
-    { name: "lisere-vexille-interne" },
-    { name: "rayee" },
-    { name: "uni" },
-  ];
+    getData();
+  }, []);
 
-  const sizes = [];
+const sizes = [];
+useEffect(() => {
+  const postData = () => {
+    fetch(port + "search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        motif: motifPlume,
+        lieu: selectedLocation,
+        couleur: selectedColor,
+        typePlume: selectedFeatherType,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setOiseaux(data);
+
+      })
+    }
+    postData();
+}, [motifPlume, selectedLocation, selectedColor, selectedFeatherType]);
 
   return (
     <>
       <div>
         <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
+
           <Typography tag="h2" variant="blanc-plume">
             Identifier ma plume
           </Typography>
@@ -97,41 +80,41 @@ const IdentifierPage = () => {
 
         <Typography tag="h3"> Lieu de trouvaille </Typography>
         <div className="flex flex-row items-center justify-center">
-          {locationData.map((location, index) => (
+          {backendData && backendData.lieu ? backendData.lieu.map((location) => (
             <FindingLocationCards
-              key={index}
-              title={location.title}
+              key={location.nom}
+              title={location.nom}
               logoFileName={location.logoFileName}
-              handleClick={() => setSelectedLocation(location.title)}
-              selected={selectedLocation === location.title}
+              handleClick={() => setSelectedLocation(location.nom)}
+              selected={selectedLocation === location.nom}
             />
-          ))}
+          )) : null}
         </div>
 
         <Typography tag="h3"> Type de plume </Typography>
         <div className="flex flex-row items-center justify-center">
-          {plumeData.map((plume) => (
+          {backendData && backendData ? backendData.type.map((plume) => (
             <FeatherTypeCards
-              key={plume.Id_Plumes}
-              type={plume["types de plumes"]}
+              key={plume.types_de_plumes}
+              type={plume.types_de_plumes}
               folder="typePlume"
-              handleClick={() => setSelectedFeatherType(plume.Id_Plumes)}
-              selected={selectedFeatherType === plume.Id_Plumes}
+              handleClick={() => setSelectedFeatherType(plume.types_de_plumes)}
+              selected={selectedFeatherType === plume.types_de_plumes}
             />
-          ))}
+          )) : null}
         </div>
 
         <Typography tag="h3"> Motif de Plume</Typography>
         <div className="flex flex-row items-center justify-center">
-          {motifData.map((motif) => (
+          {backendData && backendData.motif ? backendData.motif.map((motif) => (
             <FeatherTypeCards
-              key={motif.name}
-              type={motif.name}
+              key={motif.nom}
+              type={motif.nom === "barre terminale" || motif.nom === "liseré sur le vexille" ? motif.nom = "" : motif.nom}
               folder="motifPlume"
-              handleClick={() => setMotifPlume(motif.name)}
-              selected={motifPlume === motif.name}
+              handleClick={() => setMotifPlume(motif.nom)}
+              selected={motifPlume === motif.nom}
             />
-          ))}
+          )) : null}
         </div>
 
         <Typography tag="h3"> Couleurs</Typography>
@@ -142,11 +125,21 @@ const IdentifierPage = () => {
         />
 
         <Typography tag="h3"> Tailles</Typography>
-        <CursorSize/>
-        
+        <CursorSize />
+
         <ContainerButton
-          onClickDelete={() => console.log("detele")}
-          onClickSeeResults={() => console.log("see result")}
+          onClickDelete={() => {
+            console.log("detele")
+            setSelectedFeatherType(null);
+            setSelectedLocation(null);
+            setMotifPlume(null);
+            setSelectedColor(null);
+          }}
+          onClickSeeResults={() => {
+            console.log(oiseaux);
+
+            navigate('/resultat', { state: { selectedLocation: selectedLocation, selectedFeatherType: selectedFeatherType, motifPlume: motifPlume, selectedColor: selectedColor, oiseaux: oiseaux } })
+          }}
         />
       </div>
     </>

@@ -27,8 +27,9 @@ const Header = () => {
 
   return (
     <>
-      {/* Header visible sur les écrans de taille moyenne et supérieure */}
-      <header className="hidden md:flex justify-between items-center bg-noir-corbeau p-4">
+
+      <header className="hidden md:flex justify-between items-center bg-noir-corbeau p-4 h-[11vh]">
+
         <nav className="mx-auto">
           <ul className="flex gap-10">
             {/* Mapping des éléments de navigation */}
@@ -70,9 +71,16 @@ const Header = () => {
 
               // Création de classes conditionnelles pour gérer l'apparence de l'élément actif
               const classes = clsx({
+
                 "transition-all z-10 absolute bg-white flex justify-center items-center h-12 w-16 top-0 border-4 border-ui-noir-corbeau": true, // Style de base de l'icône
                 "-top-6 ": isActive, // Déplacer l'élément vers le haut s'il est actif
+
               });
+
+              const textStyles = {
+                transform: isActive ? "scale(1.5)" : "scale(1)",
+                marginTop: isActive ? "-6px" : "0",
+              };
 
               return (
                 <li key={element.name} className="text-center relative">
@@ -83,30 +91,48 @@ const Header = () => {
                         {/* Utilisation de classes conditionnelles pour gérer l'apparence de l'icône */}
                         <div
                           className={classes}
-                          style={{ borderRadius: "40px" }} // Définition du rayon de bordure pour l'icône
+
+
+                          style={{
+                            borderRadius: "40px",
+                            transform: isActive ? "scale(1.5)" : "scale(1)",
+                            marginTop: isActive ? "-4px" : "0",
+                          }}
+
                         >
                           <img
                             src={element.icon}
                             alt={element.name}
-                            className="icon mx-auto" // Centrage horizontal
-                            style={{ filter: "invert(1)" }} // Inversion des couleurs de l'icône
+
+                            className="icon mx-auto"
+                            style={{ filter: "invert(1)" }}
                           />
                         </div>
                         <div
-                          className="transition-all relative flex justify-center items-center h-12 w-16 z-0"
-                          style={{ borderRadius: "40px" }} // Définition du rayon de bordure pour l'icône
+                          className="transition-all relative flex justify-center items-center h-12 w-16 z-0 border-2 border-ui-noir-corbeau"
+                          style={{
+                            borderRadius: "40px",
+                            marginTop: isActive ? "-4px" : "0",
+                          }}
+
                         >
                           <img
                             src={element.icon}
                             alt={element.name}
-                            className="icon mx-auto" // Centrage horizontal
-                            style={{ filter: "invert(1)" }} // Inversion des couleurs de l'icône
+
+
+                            className="icon mx-auto"
+                            style={{ filter: "invert(1)" }}
+
                           />
                         </div>
                       </>
                     )}
-                    {/* Affichage du nom de l'élément de navigation */}
-                    <div className="text-xs">{element.name}</div> {/* Texte plus petit */}
+
+                    <div className="text-xs" style={textStyles}>
+                      {element.name}
+                    </div>
+
                   </Link>
                 </li>
               );

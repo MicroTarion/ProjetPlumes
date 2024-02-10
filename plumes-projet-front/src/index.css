@@ -24,3 +24,9 @@ svg path {
   --search-marron: #8b4513;
   --search-noir: #000000;
 }
+
+@font-face {
+  font-family: 'f37-attila', sans-serif;
+  src: url('./assets/fonts/F37 Attila/F37Attila-Bold.ttf') format('truetype');
+}
+
