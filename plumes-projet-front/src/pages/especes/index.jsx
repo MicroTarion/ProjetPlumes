@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 import Abecedaire from "../../components/common/Abecedaire";
 import TitleBarre from "../../components/common/TitleBarre";
 
-const port = "http://localhost:5000/";
 
+const port = "http://localhost:5000/"; // Port pour l'API backend
+
+// Composant pour afficher chaque carte d'oiseau et de plume
 const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
   return (
     <div className={`mb-${isFirst ? "12" : "8"} hover:scale-105 transition-transform duration-300`}>
+      {/* Affichage de la lettre en bleu ciel si elle est sélectionnée et que c'est la première carte */}
       {selectedLetter !== "" && isFirst ? (
         <div className="absolute left-0 top-0 ml-8 font-bold text-lg" style={{ marginTop: '-6px' }}>
           <u className={`text-ui-bleu-ciel font-bold text-lg`}>
@@ -17,9 +21,12 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
         </div>
       ) : null}
 
+      {/* Affichage du nom de l'oiseau */}
       <h4 className="text-blanc-plume font-poppins">{oiseau.nom}</h4>
 
+      {/* Affichage des images et des noms des oiseaux et des plumes */}
       <div className="flex">
+        {/* Image et nom de l'oiseau */}
         <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
           <img
             className="w-auto max-h-[7rem] rounded shadow-lg z-10"
@@ -29,6 +36,7 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
           <p className="text-xs text-ui-blanc-plume font-poppins">{` ${oiseau.NomOiseau}`}</p>
         </div>
 
+        {/* Image et nom de la plume */}
         <div className="flex flex-col items-center space-y-4 mx-2 relative mt-4">
           <img
             className="w-auto max-h-[8rem] rounded shadow-lg z-10"
@@ -42,14 +50,13 @@ const OiseauEtPlumeCard = ({ oiseau, selectedLetter, isFirst }) => {
   );
 };
 
-
-
-
+// Page principale pour afficher les espèces d'oiseaux
 const EspecesPage = () => {
-  const [backendData, setBackendData] = useState(null);
-  const [selectedLetter, setSelectedLetter] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [backendData, setBackendData] = useState(null); // Données récupérées depuis le backend
+  const [selectedLetter, setSelectedLetter] = useState(""); // Lettre sélectionnée dans l'abécédaire
+  const [searchTerm, setSearchTerm] = useState(""); // Terme de recherche dans la barre de recherche
 
+  // Effet pour récupérer les données depuis le backend lors du chargement de la page
   useEffect(() => {
     const getData = () => {
       fetch(port + "list")
@@ -63,36 +70,36 @@ const EspecesPage = () => {
     getData();
   }, []);
 
+  // Générer l'alphabet
   const alphabet = Array.from({ length: 26 }, (_, i) =>
     String.fromCharCode("A".charCodeAt(0) + i)
   );
 
+  // Filtrer les données par lettre sélectionnée
   const filterByLetter = (letter) => {
     setSelectedLetter(letter);
     setSearchTerm("");
   };
 
-  const isLetterDisplayed = backendData? backendData.filter((oiseaux) => {
-    return oiseaux.NomOiseau.includes(selectedLetter)}): false;
+  // Vérifier si une lettre est affichée dans la liste des espèces
+  const isLetterDisplayed = backendData ? backendData.filter((oiseaux) => {
+    return oiseaux.NomOiseau.includes(selectedLetter)
+  }) : false;
 
-    const getFilteredData = () => {
-
-      if(!backendData) return [];
-  
-      if (selectedLetter) {
-        return backendData.filter(
-          (oiseaux) => ( oiseaux.NomOiseau[0].toUpperCase() === selectedLetter))
-  
-      } else if (searchTerm) {
-        return backendData.filter(
-          (oiseaux) => oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      } else {
-        return backendData
-      }
+  // Fonction pour obtenir les données filtrées en fonction de la lettre sélectionnée ou du terme de recherche
+  const getFilteredData = () => {
+    if (!backendData) return [];
+    if (selectedLetter) {
+      return backendData.filter((oiseaux) => oiseaux.NomOiseau[0].toUpperCase() === selectedLetter);
+    } else if (searchTerm) {
+      return backendData.filter((oiseaux) => oiseaux.NomOiseau.toLowerCase().includes(searchTerm.toLowerCase()));
+    } else {
+      return backendData;
     }
-  
-    const filteredData = getFilteredData();
+  };
+
+  // Données filtrées en fonction de la lettre sélectionnée ou du terme de recherche
+  const filteredData = getFilteredData();
 
   return (
     <div>
