@@ -9,8 +9,9 @@ const Layout = () => {
       <Header />
       <PageLayout>
         <Outlet />
+        <Footer />
       </PageLayout>
-      <Footer />
+      
     </>
   );
 };

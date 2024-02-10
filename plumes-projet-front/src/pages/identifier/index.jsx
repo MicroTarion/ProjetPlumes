@@ -70,7 +70,7 @@ useEffect(() => {
 
   return (
     <>
-      <div>
+      <div className="min-h-[900px]">
         <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
 
           <Typography tag="h2" variant="blanc-plume">
