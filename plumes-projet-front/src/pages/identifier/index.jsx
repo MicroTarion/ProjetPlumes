@@ -43,7 +43,6 @@ const IdentifierPage = () => {
     getData();
   }, []);
 
-const sizes = [];
 useEffect(() => {
   const postData = () => {
     fetch(port + "search", {
@@ -72,7 +71,7 @@ console.log(backendData ? backendData.lieu: null);
 
   return (
     <>
-      <div>
+      <div className="min-h-[1025px]">
         <div className="bg-vert-naturaliste flex items-center justify-center vh-10 text-ui-blanc-plume">
 
           <Typography tag="h2" variant="blanc-plume">

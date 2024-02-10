@@ -2,7 +2,7 @@ const con = require('../../app/database_sql');
 module.exports = class oiseauRepository {
 
     async getAllOiseaux() {
-        return await con.promise().query("SELECT o.nom AS NomOiseau, o.illustration AS illustration, ord.nom AS NomOrdre, f.nom AS NomFamille, p.illustration AS img_plumes FROM oiseaux o INNER JOIN posseder pos ON o.Id_Oiseaux = pos.Id_Oiseaux INNER JOIN plumes p ON pos.Id_Plumes = p.Id_Plumes INNER JOIN famille f ON o.Id_Famille = f.Id_Famille INNER JOIN ordre ord ON o.Id_Ordre = ord.Id_Ordre;").then((result) => {
+        return await con.promise().query("SELECT o.Id_Oiseaux AS Id_oiseaux, o.nom AS NomOiseau, o.illustration AS illustration, ord.nom AS NomOrdre, f.nom AS NomFamille, p.illustration AS img_plumes FROM oiseaux o INNER JOIN posseder pos ON o.Id_Oiseaux = pos.Id_Oiseaux INNER JOIN plumes p ON pos.Id_Plumes = p.Id_Plumes INNER JOIN famille f ON o.Id_Famille = f.Id_Famille INNER JOIN ordre ord ON o.Id_Ordre = ord.Id_Ordre;").then((result) => {
             return (result[0].length != 0 ? result[0] : null);
         })
     }
