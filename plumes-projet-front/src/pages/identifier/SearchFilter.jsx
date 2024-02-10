@@ -1,11 +1,17 @@
 import FindingLocationCards from "../../components/cards/FindingLocationCards";
 import Typography from "../../components/common/Typography";
-import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
-import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
-import CursorSize from "../../components/cards/CursorSize";
 import ContainerButton from "./ContainerButton";
+import FeatherTypeCards from "../../components/cards/FeatherTypeCards";
+/////////////// A DECOMMENTER //////////////////
+// import { useState, useEffect } from "react";
+// import { useNavigate } from 'react-router-dom';
+import CursorSize from "../../components/cards/CursorSize";
+import PaletCardSingleColor from "../../components/cards/PaletCardSingleColor";
+
 
 const SearchFilter = ({
+
+  // ********** à commenter jusqu'à ligne 24 *********
   selectedLocation,
   setSelectedLocation,
   selectedFeatherType,
@@ -15,6 +21,26 @@ const SearchFilter = ({
   selectedColor,
   setSelectedColor,
   postData,
+  // ********** fin commentation *********
+
+
+// ********** à décommenter jusqu'a la ligne 53 *********
+// backendData,
+// oiseaux,
+// motifPlume,
+// setMotifPlume,
+// selectedLocation,
+// setSelectedLocation,
+// selectedFeatherType,
+// setSelectedFeatherType,
+// selectedColor,
+// setSelectedColor,
+//********** fin décommentation *********
+
+
+
+//////////////////////////////////////////
+//////** à commenter jusqu'au return **************
 }) => {
   const locationData = [
     { title: "Campagne", logoFileName: "icon-countryside.svg" },
@@ -83,6 +109,10 @@ const SearchFilter = ({
 
   const sizes = [];
 
+  /////////////////////Fin Commentaire /////////////////////
+
+
+  /////////// Puis commenter le return //////////////////
   return (
     <>
       {/* Filtre pour choix du lieu */}
@@ -166,5 +196,98 @@ const SearchFilter = ({
     // </div>
   );
 };
-
 export default SearchFilter;
+
+////////////////// return à décommenter pour dernière version backend //////////////////
+
+// return (
+//   <>
+//     {/* Filtre pour choix du lieu */}
+//     <div className="searchFilter p-4 ">
+//       <Typography tag="h3"> Lieu de trouvaille </Typography>
+//       <div className="overflow-x-auto">
+//         <div className="flex flex-row items-center justify-center mt-4 ml-3 mb-10">
+//         {backendData && backendData.lieu ? backendData.lieu.map((location) => (
+//             <FindingLocationCards
+//               key={location.nom}
+//               title={location.nom}
+//               logoFileName={location.logoFileName}
+//               handleClick={() => setSelectedLocation(location.nom)}
+//               selected={selectedLocation === location.nom}
+//             />
+//           )) : null}
+//         </div>
+//       </div>
+
+
+//       {/* Filtre pour choix du type de plume */}
+//       <Typography tag="h3" className="mt-10"> Type de plume </Typography>
+//       <div className="overflow-x-auto">
+//         <div className="flex flex-row items-center justify-center mt-4 ml-3 mb-10">
+//         {backendData && backendData ? backendData.type.map((plume) => (
+//             <FeatherTypeCards
+//               key={plume.types_de_plumes}
+//               type={plume.types_de_plumes}
+//               folder="typePlume"
+//               handleClick={() => setSelectedFeatherType(plume.types_de_plumes)}
+//               selected={selectedFeatherType === plume.types_de_plumes}
+//             />
+//           )) : null}
+//         </div>
+//       </div>
+
+//       {/* Filtre pour choix du motif de plume */}
+//       <Typography tag="h3" className="mt-10"> Motif de Plume</Typography>
+//       <div className="overflow-x-auto">
+//         <div className="flex flex-row items-center justify-center mt-4 ml-3 mb-10">
+//           {backendData && backendData.motif ? backendData.motif.map((motif) => (
+//             <FeatherTypeCards
+//               key={motif.nom}
+//               type={motif.nom === "barre terminale" || motif.nom === "liseré sur le vexille" ? motif.nom = "" : motif.nom}
+//               folder="motifPlume"
+//               handleClick={() => setMotifPlume(motif.nom)}
+//               selected={motifPlume === motif.nom}
+//             />
+//           )) : null}
+//         </div>
+//       </div>
+
+//       {/* Filtre pour choix de la couleur */}
+//       <Typography tag="h3" className="mt-10"> Couleurs</Typography>
+//       <div className="overflow-x-auto">
+//         <PaletCardSingleColor
+//           selectedColor={selectedColor}
+//           setSelectedColor={setSelectedColor}
+//         />
+//       </div>
+
+//       {/* Filtre pour choix de la taille */}
+//       <Typography tag="h3"> Tailles</Typography>
+//       <CursorSize />
+
+//       {/* Buttons pour supprimer les filtres et voir les résultats*/}
+//       <ContainerButton
+//           onClickDelete={() => {
+//             console.log("detele")
+//             setSelectedFeatherType(null);
+//             setSelectedLocation(null);
+//             setMotifPlume(null);
+//             setSelectedColor(null);
+//           }}
+//           onClickSeeResults={() => {
+//             console.log(oiseaux);
+
+//             navigate('/resultat', { state: { selectedLocation: selectedLocation, selectedFeatherType: selectedFeatherType, motifPlume: motifPlume, selectedColor: selectedColor, oiseaux: oiseaux } })
+//           }}
+//         />
+
+//     </div>
+
+//   </>
+
+//   // </div>
+// );
+
+
+// };
+// export default SearchFilter;
